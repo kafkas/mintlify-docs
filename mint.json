@@ -38,20 +38,19 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["introduction", "quickstart"]
+      "pages": ["introduction", "installation", "quickstart"]
     },
     {
       "group": "Schema",
       "pages": ["schema/file", "schema/types"]
     },
     {
-      "group": "CLI",
-      "pages": ["cli/generate", "cli/check"]
+      "group": "CLI Reference",
+      "pages": ["cli/init", "cli/generate", "cli/check"]
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "discord": "https://discord.gg/Hb2HW98DvF",
+    "github": "https://github.com/kafkas/typesync"
   }
 }
