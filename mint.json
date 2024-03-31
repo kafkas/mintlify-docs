@@ -33,6 +33,11 @@
       "name": "GitHub",
       "icon": "github",
       "url": "https://github.com/kafkas/typesync"
+    },
+    {
+      "name": "Changelog",
+      "icon": "list-tree",
+      "url": "https://github.com/kafkas/typesync"
     }
   ],
   "navigation": [
