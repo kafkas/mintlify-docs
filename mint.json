@@ -3,14 +3,18 @@
   "name": "typesync",
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
+    "primary": "#19775B",
     "light": "#07C983",
-    "dark": "#0D9373",
+    "dark": "#19775B",
     "anchors": {
-      "from": "#0D9373",
+      "from": "#19775B",
       "to": "#07C983"
+    },
+    "background": {
+      "dark": "#030a08"
     }
   },
+  "logo": { "light": "images/logo-light.png", "dark": "images/logo-dark.png" },
   "topbarLinks": [
     {
       "type": "link",
