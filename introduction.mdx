@@ -8,3 +8,27 @@ also lets you generate other useful things like Firestore Rules and Cloud Functi
 
 The TypeSync schema is the single source of truth for your Firestore architecture.
 
+## TypeSync in 30 seconds
+
+## Design Goals
+
+TypeSync is designed to adhere to the following principles.
+
+### 1. Predictable (dumb)
+
+No "gotchas", no secret configurations, no special directories, no implicit assumptions. TypeSync never tries to outsmart
+you. If you give it bad parameters it will _not_ try to make the most the situation. It will likely either error or produce
+a bad output. This is because we believe it's crucial for TypeSync to not have any unexpected behaviour even if that behaviour
+may be considered useful for a subset of developers. We believe developer tools that are unpredictable often cause frustration
+and confusion and overall a bad developer experience. We want TypeSync to do exactly and only what it promises to do. Nothing
+more, nothing less.
+
+### 2. Ejectable
+
+There's no "lock-in". TypeSync is not a library that tightly attaches itself to your code. You can eject from
+TypeSync at any time by simply copy-pasting the generated output into your source code without having to refactor your code.
+That's why it's extremely easy to adopt _and_ abandon!
+
+### 3. Configurable
+
+Everything that can be reasonably expected to be configurable is made explicitly configurable.
