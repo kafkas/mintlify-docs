@@ -1,5 +1,42 @@
 ---
-title: 'Quickstart'
+title: "Quickstart"
 ---
 
 Use `typesync init` to create a Typesync definition and start generating types.
+
+<CodeGroup>
+
+```yaml root.yml
+# The Typesync specification version for this definition.
+# Using a recent spec version will ensure that you have
+# access to all the latest features.
+spec-version: 0.1
+
+# All the YAML files in the current directory and the nested
+# directories should be included in the Typesync definition.
+models: "**/*.yml"
+```
+
+```yaml user.yml
+User:
+  model: document
+  docs: Represents a user that belongs to a project.
+  type:
+    type: object
+    fields:
+      username:
+        type: string
+        docs: A string that uniquely identifies the user within a project.
+      role:
+        type:
+          type: enum
+          items:
+            - label: Owner
+              value: owner
+            - label: Admin
+              value: admin
+      created_at:
+        type: timestamp
+```
+
+</CodeGroup>

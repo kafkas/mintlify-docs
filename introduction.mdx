@@ -13,15 +13,15 @@ In the example below we generate model definitions for 3 platforms:
 <CodeGroup>
 
 ```bash TS (frontend)
-typesync generate --definition ./models.yml --platform ts:firebase:10 --pathToOutputDir ./output
+typesync generate --platform ts:firebase:10 # ... other options
 ```
 
 ```bash TS (backend)
-typesync generate --definition ./models.yml --platform ts:firebase-admin:11 --pathToOutputDir ./output
+typesync generate --platform ts:firebase-admin:11 # ... other options
 ```
 
 ```bash Python
-typesync generate --definition ./models.yml --platform py:firebase-admin:6 --pathToOutputDir ./output
+typesync generate --platform py:firebase-admin:6 # ... other options
 ```
 
 </CodeGroup>

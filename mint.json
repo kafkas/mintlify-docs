@@ -51,7 +51,7 @@
     },
     {
       "group": "Schema",
-      "pages": ["schema/file", "schema/types"]
+      "pages": ["schema/definition", "schema/types"]
     },
     {
       "group": "CLI Reference",
