@@ -3,43 +3,11 @@ title: "Definition"
 icon: "files"
 ---
 
-The Typesync schema for a project is defined in a collection of YAML files. A definition requires a single
-_root_ file and any number of model definition files. The root file includes the specification version and the location of the other YAML files comprising the definition.
+The Typesync schema for a project is defined in a collection of YAML files. Your definition can contain as many model definition files as you need and you can organize them any way you want. There are two types of models that you can define in a model definition file: document models and alias models.
 
-## Root file
+## Document models
 
-<ParamField path="spec-version" type="string">
-  The Typesync specification version for this definition. Using a recent spec
-  version will ensure that you have access to all the latest features. You can
-  view the list of available spec versions [here](https://typesync.org).
-  {/* TODO: Add link */}
-</ParamField>
-
-<ParamField path="models" type="string | string[]">
-  The path or paths to the files containing your model definitions. You can
-  specify the location of your definition files with
-  [Glob](https://github.com/isaacs/node-glob) patterns and/or exact paths.
-</ParamField>
-
-### Example
-
-```yaml root.yml
-spec-version: 0.1
-
-# All the .yml files in the current directory and the nested
-# directories should be included in the Typesync definition.
-models: "**/*.yml"
-```
-
-## Model definitions
-
-Your definition can contain as many model definition files as you need and you can organize them any way you want. There are two types of models that you can define in a model definition file: document models and alias models.
-
-### Document models
-
-A document model represents the shape of a document in a particular Firestore collection.
-
-There are two Typesync types that can represent the shape of a document model: `object` and `map`. Use `object` when you know the exact fields that the document should contain (this is most often the case). Use `map` when the document is used as a mapping from arbitrary strings to other types. TODO
+A document model represents the shape of a document in a particular Firestore collection. There are two Typesync types that can represent the shape of a document model: `object` and `map`. Use `object` when you know the exact fields that the document should contain (this is most often the case). Use `map` when the document is used as an arbitrary mapping.
 
 <ParamField path="model" type='"document"' required>
   A literal field that specifies that this is a `document` model.
@@ -55,7 +23,7 @@ There are two Typesync types that can represent the shape of a document model: `
   by either an `object` or a `map`. TODO
 </ParamField>
 
-#### Example
+### Example
 
 ```yaml user.yml
 User:
@@ -71,7 +39,7 @@ User:
         type: timestamp
 ```
 
-### Alias models
+## Alias models
 
 An alias model is used for convenience purposes to define reusable type aliases. You can use the same alias model in multiple document models. You can also use alias models when composing other aliases.
 
@@ -88,7 +56,7 @@ An alias model is used for convenience purposes to define reusable type aliases.
   The type representing the shape of the document. TODO
 </ParamField>
 
-#### Example
+### Example
 
 ```yaml user.yml
 UserRole:
