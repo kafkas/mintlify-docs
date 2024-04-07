@@ -20,12 +20,14 @@ A document model represents the shape of a document in a particular Firestore co
 
 <ParamField path="type" type="hash" required>
   The type representing the shape of the document. A document can be represented
-  by either an `object` or a `map`. TODO
+  only by an `object` type.
 </ParamField>
 
 ### Example
 
 ```yaml user.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
 User:
   model: document
   docs: Represents a user that belongs to a project.
@@ -59,6 +61,8 @@ An alias model is used for convenience purposes to define reusable type aliases.
 ### Example
 
 ```yaml user.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
 UserRole:
   model: alias
   docs: Represents a user's role within a project.
