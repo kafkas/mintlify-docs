@@ -76,3 +76,20 @@ UserRole:
       - label: Member
         value: member
 ```
+
+## Autcomplete/Intellisense
+
+When writing your definition, always include the following line at the top of each definition file.
+
+```yaml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+```
+
+This indicates to your IDE that the file is not just any YAML file but is part of a Typesync definition. This will allow your IDE to provide Intellisense/autocomplete for definition fields.
+
+<Info>
+  For the time being, you need manually synchronize the schema version in this
+  line with the Typesync version you're using. For example, if you're using
+  Typesync version 0.5.4, you need to make sure that the version in the above
+  schema URL is `v0.5` (patch version excluded).
+</Info>
