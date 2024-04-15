@@ -3,9 +3,7 @@ title: "Types"
 icon: "cube"
 ---
 
-All the types available in the Typesync specification are listed here.
-
-TODO: Add an example for each type
+All the types available in the Typesync specification are listed here. Typesync's type system is powerful and supports many complex types.
 
 ## `nil`
 
@@ -14,8 +12,6 @@ Represents the explicit absence of a value.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type: nil
@@ -38,8 +34,6 @@ Represents a string value.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type: string
@@ -62,8 +56,6 @@ Represents a boolean value.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type: boolean
@@ -86,8 +78,6 @@ Represents a signed integer.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type: int
@@ -110,8 +100,6 @@ Represents a double-precision floating point number.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type: double
@@ -134,8 +122,6 @@ Represents a datetime value.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type: timestamp
@@ -160,8 +146,6 @@ Represents a literal value.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type:
@@ -188,8 +172,6 @@ Represents an enum value.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type:
@@ -222,8 +204,6 @@ Represents a tuple value.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type:
@@ -251,8 +231,6 @@ Represents a list of items.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type:
@@ -277,8 +255,6 @@ Represents a mapping from arbitrary strings to values of any type.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type:
@@ -305,8 +281,6 @@ Represents an object with known fields.
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
-
 Example:
   model: alias
   type:
@@ -337,13 +311,38 @@ class Example(TypesyncModel):
 
 ## `union`
 
-Represents a union of multiple types.
+Represents a union of multiple types. Typesync supports two types of unions: _simple union_ and _discriminated union_. Both are defined in the same way using `variants`, except a discriminated union definition has a `discriminant` key and requires every variant to be of `object` (or `alias` resolving to `object`) type.
+
+**Simple Union Example**
 
 <CodeGroup>
 
 ```yaml definition.yml
-# yaml-language-server: $schema=../public/v0.0.json
+Path:
+  model: alias
+  type:
+    type: union
+    variants:
+      - string
+      - type: list
+        elementType: string
+```
 
+```ts models.ts
+export type Path = string | string[];
+```
+
+```python models.py
+Path = typing.Union[str, typing.List[str]]
+```
+
+</CodeGroup>
+
+**Discriminated Union Example**
+
+<CodeGroup>
+
+```yaml definition.yml
 Cat:
   model: alias
   type:
@@ -384,13 +383,13 @@ Pet:
 
 ```ts models.ts
 export type Cat = {
-  type: 'cat';
+  type: "cat";
   name: string;
   lives_left: number;
 };
 
 export type Dog = {
-  type: 'dog';
+  type: "dog";
   name: string;
   breed: string;
 };
@@ -421,3 +420,40 @@ Pet = Annotated[typing.Union[Cat, Dog], pydantic.Field(discriminator='type')]
 ## `alias`
 
 Represents an alias of another type.
+
+<CodeGroup>
+
+```yaml definition.yml
+User:
+  model: alias
+  type:
+    type: object
+    fields:
+      name_first:
+        type: string
+      name_last:
+        type: string
+
+WorkspaceMember:
+  model: alias
+  type: User
+```
+
+```ts models.ts
+export type User = {
+  name_first: string;
+  name_last: string;
+};
+
+export type WorkspaceMember = User;
+```
+
+```python models.py
+class User(TypesyncModel):
+    name_first: str
+    name_last: str
+
+WorkspaceMember = User
+```
+
+</CodeGroup>
