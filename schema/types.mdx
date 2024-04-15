@@ -339,6 +339,85 @@ class Example(TypesyncModel):
 
 Represents a union of multiple types.
 
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=../public/v0.0.json
+
+Cat:
+  model: alias
+  type:
+    type: object
+    fields:
+      type:
+        type:
+          type: literal
+          value: cat
+      name:
+        type: string
+      lives_left:
+        type: int
+
+Dog:
+  model: alias
+  type:
+    type: object
+    fields:
+      type:
+        type:
+          type: literal
+          value: dog
+      name:
+        type: string
+      breed:
+        type: string
+
+Pet:
+  model: alias
+  type:
+    type: union
+    discriminant: type
+    variants:
+      - Cat
+      - Dog
+```
+
+```ts models.ts
+export type Cat = {
+  type: 'cat';
+  name: string;
+  lives_left: number;
+};
+
+export type Dog = {
+  type: 'dog';
+  name: string;
+  breed: string;
+};
+
+export type Pet = Cat | Dog;
+```
+
+```python models.py
+import typing
+import pydantic
+from typing_extensions import Annotated
+
+class Cat(TypesyncModel):
+    type: typing.Literal["cat"]
+    name: str
+    lives_left: int
+
+class Dog(TypesyncModel):
+    type: typing.Literal["dog"]
+    name: str
+    breed: str
+
+Pet = Annotated[typing.Union[Cat, Dog], pydantic.Field(discriminator='type')]
+```
+
+</CodeGroup>
+
 ## `alias`
 
 Represents an alias of another type.
