@@ -55,7 +55,7 @@
     },
     {
       "group": "CLI Reference",
-      "pages": ["cli/init", "cli/generate", "cli/check"]
+      "pages": ["cli/generate", "cli/validate"]
     }
   ],
   "footerSocials": {

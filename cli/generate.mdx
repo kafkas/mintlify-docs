@@ -1,10 +1,38 @@
 ---
 title: "generate"
-icon: 'rectangle-terminal'
+icon: "rectangle-terminal"
 ---
+
+Generates the type definitions for a given Typesync definition and target platform.
 
 ## Usage
 
 ```bash
-typesync generate
+typesync generate --definition <filePathOrPattern> --platform <platform> --outFile <filePath> --indentation <indentation> --debug <debug>
 ```
+
+<ParamField type="string" path="filePathOrPattern" required>
+  The exact path or a Glob pattern to the definition file or files. Each
+  definition file must be a YAML file containing model definitions.
+</ParamField>
+
+<ParamField type="string" path="platform" required>
+  Target platform and version. The available platforms are:
+
+- `ts:firebase-admin:12`
+- `ts:firebase-admin:11`
+- `ts:firebase:10`
+- `ts:firebase:9`
+- `py:firebase-admin:6`
+
+</ParamField>
+
+<ParamField type="string" path="outFile" required>
+  The path to the output file.
+</ParamField>
+
+<ParamField type="int" path="indentation">
+  Indentation or tab width for the generated code.
+</ParamField>
+
+<ParamField type="boolean" path="debug">Whether to enable debug logs.</ParamField>

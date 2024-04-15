@@ -1,0 +1,20 @@
+---
+title: "validate"
+icon: "rectangle-terminal"
+---
+
+Validates a given a given Typesync definition.
+
+## Usage
+
+```bash
+typesync validate --definition <filePathOrPattern> --debug <debug>
+```
+
+<ParamField type="string" path="filePathOrPattern" required>
+  The exact path or a Glob pattern to the definition file or files. Each
+  definition file must be a YAML file containing model definitions.
+</ParamField>
+
+
+<ParamField type="boolean" path="debug">Whether to enable debug logs.</ParamField>
