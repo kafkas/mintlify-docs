@@ -37,27 +37,7 @@ graph LR;
 
 You define your Firestore schema in a collection of YAML files. The Typesync CLI reads these files and produces ready-to-use Firestore model definitions for all the languages and platforms you work with.
 
-In the example below we generate model definitions for 3 platforms:
-
-<CodeGroup>
-
-```bash TS (frontend)
-typesync generate --platform ts:firebase:10 --definition models.yml # ... other options
-```
-
-```bash TS (backend)
-typesync generate --platform ts:firebase-admin:11 --definition models.yml # ... other options
-```
-
-```bash Python
-typesync generate --platform py:firebase-admin:6 --definition models.yml # ... other options
-```
-
-</CodeGroup>
-
-We define our models in `models.yml` and Typesync generates the rest of the files.
-
-<CodeGroup>
+In the example below, we define our models in `models.yml`.
 
 ```yaml models.yml
 # yaml-language-server: $schema=https://schema.typesync.org/v0.1.json
@@ -67,7 +47,7 @@ UserRole:
   docs: Represents a user's role within a project.
   type:
     type: enum
-    items:
+    members:
       - label: Owner
         value: owner
       - label: Admin
@@ -89,6 +69,28 @@ User:
       created_at:
         type: timestamp
 ```
+
+We then run the following commands to generate types for 3 different platforms:
+
+<CodeGroup>
+
+```bash TS (frontend)
+typesync generate --platform ts:firebase:10 --definition models.yml # ... other options
+```
+
+```bash TS (backend)
+typesync generate --platform ts:firebase-admin:11 --definition models.yml # ... other options
+```
+
+```bash Python
+typesync generate --platform py:firebase-admin:6 --definition models.yml # ... other options
+```
+
+</CodeGroup>
+
+Typesync generates the following files:
+
+<CodeGroup>
 
 ```ts models.ts (frontend)
 import type * as firestore from "firebase/firestore";
@@ -141,20 +143,15 @@ import pydantic
 # [static declarations redacted for brevity]
 
 class UserRole(enum.Enum):
-    """
-    Represents a user's role within a project.
-    """
-
+    """Represents a user's role within a project."""
     Owner = "owner"
     Admin = "admin"
     Member = "member"
 
 class User(TypesyncModel):
-    """
-    Represents a user that belongs to a project.
-    """
-
+    """Represents a user that belongs to a project."""
     username: str
+    """A string that uniquely identifies the user within a project."""
     role: UserRole
     created_at: datetime.datetime
 
