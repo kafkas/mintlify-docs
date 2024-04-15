@@ -146,21 +146,21 @@ Represents a literal value.
 <CodeGroup>
 
 ```yaml definition.yml
-Example:
+MeaningOfLife:
   model: alias
   type:
     type: literal
-    value: apple
+    value: 42
 ```
 
 ```ts models.ts
-export type Example = "apple";
+export type MeaningOfLife = 42;
 ```
 
 ```python models.py
 import typing
 
-Example = typing.Literal["apple"]
+MeaningOfLife = typing.Literal[42]
 ```
 
 </CodeGroup>
@@ -172,27 +172,31 @@ Represents an enum value.
 <CodeGroup>
 
 ```yaml definition.yml
-Example:
+UserRole:
   model: alias
+  docs: Represents a user's role within a project.
   type:
     type: enum
     members:
-      - label: web
-        value: web
-      - label: ios
-        value: ios
+      - label: Owner
+        value: owner
+      - label: Admin
+        value: admin
+      - label: Member
+        value: member
 ```
 
 ```ts models.ts
-export type Example = "web" | "ios";
+export type UserRole = "owner" | "admin" | "member";
 ```
 
 ```python models.py
 import enum
 
-class Example(enum.Enum):
-    web = "web"
-    ios = "ios"
+class UserRole(enum.Enum):
+    Owner = "owner"
+    Admin = "admin"
+    Member = "member"
 ```
 
 </CodeGroup>
