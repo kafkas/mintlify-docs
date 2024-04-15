@@ -11,49 +11,329 @@ TODO: Add an example for each type
 
 Represents the explicit absence of a value.
 
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type: nil
+```
+
+```ts models.ts
+export type Example = null;
+```
+
+```python models.py
+Example = None
+```
+
+</CodeGroup>
+
 ## `string`
 
 Represents a string value.
+
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type: string
+```
+
+```ts models.ts
+export type Example = string;
+```
+
+```python models.py
+Example = str
+```
+
+</CodeGroup>
 
 ## `boolean`
 
 Represents a boolean value.
 
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type: boolean
+```
+
+```ts models.ts
+export type Example = boolean;
+```
+
+```python models.py
+Example = bool
+```
+
+</CodeGroup>
+
 ## `int`
 
 Represents a signed integer.
+
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type: int
+```
+
+```ts models.ts
+export type Example = number;
+```
+
+```python models.py
+Example = int
+```
+
+</CodeGroup>
 
 ## `double`
 
 Represents a double-precision floating point number.
 
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type: double
+```
+
+```ts models.ts
+export type Example = number;
+```
+
+```python models.py
+Example = float
+```
+
+</CodeGroup>
+
 ## `timestamp`
 
 Represents a datetime value.
+
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type: timestamp
+```
+
+```ts models.ts
+export type Example = firestore.Timestamp;
+```
+
+```python models.py
+import datetime
+
+Example = datetime.datetime
+```
+
+</CodeGroup>
 
 ## `literal`
 
 Represents a literal value.
 
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type:
+    type: literal
+    value: apple
+```
+
+```ts models.ts
+export type Example = "apple";
+```
+
+```python models.py
+import typing
+
+Example = typing.Literal["apple"]
+```
+
+</CodeGroup>
+
 ## `enum`
 
 Represents an enum value.
+
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type:
+    type: enum
+    members:
+      - label: web
+        value: web
+      - label: ios
+        value: ios
+```
+
+```ts models.ts
+export type Example = "web" | "ios";
+```
+
+```python models.py
+import enum
+
+class Example(enum.Enum):
+    web = "web"
+    ios = "ios"
+```
+
+</CodeGroup>
 
 ## `tuple`
 
 Represents a tuple value.
 
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type:
+    type: tuple
+    elements:
+      - string
+      - boolean
+      - int
+```
+
+```ts models.ts
+export type Example = [string, boolean, number];
+```
+
+```python models.py
+Example = tuple[str, bool, int]
+```
+
+</CodeGroup>
+
 ## `list`
 
 Represents a list of items.
+
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type:
+    type: list
+    elementType: string
+```
+
+```ts models.ts
+export type Example = string[];
+```
+
+```python models.py
+Example = typing.List[str]
+```
+
+</CodeGroup>
 
 ## `map`
 
 Represents a mapping from arbitrary strings to values of any type.
 
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type:
+    type: map
+    valueType: int
+```
+
+```ts models.ts
+export type Example = Record<string, number>;
+```
+
+```python models.py
+import typing
+
+Example = typing.Dict[str, int]
+```
+
+</CodeGroup>
+
 ## `object`
 
 Represents an object with known fields.
+
+<CodeGroup>
+
+```yaml definition.yml
+# yaml-language-server: $schema=https://schema.typesync.org/v0.0.json
+
+Example:
+  model: alias
+  type:
+    type: object
+    fields:
+      name:
+        type: string
+      completed:
+        type: boolean
+```
+
+```ts models.ts
+export type Example = {
+  name: string;
+  completed: boolean;
+};
+```
+
+```python models.py
+# ...
+class Example(TypesyncModel):
+    name: str
+    completed: bool
+# ...
+```
+
+</CodeGroup>
 
 ## `union`
 
