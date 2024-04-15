@@ -41,7 +41,7 @@
     {
       "name": "Changelog",
       "icon": "list-tree",
-      "url": "https://github.com/kafkas/typesync"
+      "url": "https://github.com/kafkas/typesync/blob/main/CHANGELOG.md"
     }
   ],
   "navigation": [
