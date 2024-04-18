@@ -3,7 +3,7 @@ title: "Definition"
 icon: "files"
 ---
 
-The Typesync schema for a project is defined in a collection of YAML files. Your definition can contain as many model definition files as you need and you can organize them any way you want. There are two types of models that you can define in a model definition file: document models and alias models.
+The Typesync schema for a project is defined in a collection of YAML/JSON files. Your definition can contain as many model definition files as you need and you can organize them any way you want. There are two types of models that you can define in a model definition file: _document models_ and _alias models_.
 
 <Info>We use the terms _definition_ and _schema_ interchangeably.</Info>
 
@@ -22,7 +22,7 @@ A document model represents the shape of a document in a particular Firestore co
 
 <ParamField path="type" type="hash" required>
   The type representing the shape of the document. A document can be represented
-  only by an `object` type.
+  only by an [object](/schema/types#object) type.
 </ParamField>
 
 ### Example
@@ -57,7 +57,7 @@ An alias model is used for convenience purposes to define reusable type aliases.
 </ParamField>
 
 <ParamField path="type" type="string | hash" required>
-  The type representing the shape of the document. TODO
+  The type of which this model is an alias. Can be any Typesync [type](/schema/types).
 </ParamField>
 
 ### Example
