@@ -3,12 +3,12 @@
   "name": "typesync",
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#19775B",
-    "light": "#07C983",
-    "dark": "#19775B",
+    "primary": "#0F9F7D",
+    "light": "#13C198",
+    "dark": "#0F9F7D",
     "anchors": {
-      "from": "#19775B",
-      "to": "#07C983"
+      "from": "#0F9F7D",
+      "to": "#13C198"
     },
     "background": {
       "dark": "#030a08"
