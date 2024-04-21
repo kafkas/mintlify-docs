@@ -294,12 +294,16 @@ Example:
         type: string
       completed:
         type: boolean
+      github_url:
+        type: string
+        optional: true
 ```
 
 ```ts models.ts
 export type Example = {
   name: string;
   completed: boolean;
+  github_url?: string;
 };
 ```
 
@@ -308,6 +312,7 @@ export type Example = {
 class Example(TypesyncModel):
     name: str
     completed: bool
+    github_url: typing.Union[TypeSyncUndefined, str] = UNDEFINED
 # ...
 ```
 

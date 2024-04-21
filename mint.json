@@ -54,6 +54,10 @@
       "pages": ["schema/definition", "schema/types"]
     },
     {
+      "group": "Target Platforms",
+      "pages": ["platforms/typescript", "platforms/python", "platforms/swift"]
+    },
+    {
       "group": "CLI Reference",
       "pages": ["cli/generate", "cli/validate"]
     }
