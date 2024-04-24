@@ -5,6 +5,30 @@ icon: "cube"
 
 Here, you'll find a comprehensive list of all types supported by the TypeSync specification. Typesync's powerful type system is designed to support a wide array of complex and useful types.
 
+## `unknown`
+
+Represents an unknown value.
+
+<CodeGroup>
+
+```yaml definition.yml
+Example:
+  model: alias
+  type: unknown
+```
+
+```ts models.ts
+export type Example = unknown;
+```
+
+```python models.py
+import typing
+
+Example = typing.Any
+```
+
+</CodeGroup>
+
 ## `nil`
 
 Represents the explicit absence of a value.
