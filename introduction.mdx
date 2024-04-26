@@ -2,10 +2,14 @@
 title: Introduction
 ---
 
-Typesync is an open-source schema management tool for [Firestore](https://cloud.google.com/firestore). It allows you to maintain a single source of truth for your Firestore architecture. With this schema in place, you can effortlessly auto-generate type definitions for multiple platforms like TypeScript, Python, Swift and more using the CLI tool. Typesync also lets you generate other useful things like Firestore Rules, Cloud Functions boilerplate and documentation for your models.
+Typesync is an open-source schema management tool that simplifies managing [Firestore](https://cloud.google.com/firestore) databases. Typesync allows you to maintain a single source of truth for your Firestore architecture in a special _schema_. With this schema in place, you can seamlessly auto-generate type definitions for multiple platforms like TypeScript, Python, Swift, and more using the CLI tool.
 
+Typesync keeps your database and application code consistent and up-to-date at all times. In addition to type definitions, it lets you generate other useful things like Security Rules, boilerplate code for Cloud Functions, and documentation for your data models.
 
-<Frame type="simple" caption="Single source of truth for your Firestore architecture">
+<Frame
+  type="glass"
+  caption="Single source of truth for your Firestore architecture"
+>
   <img src="/images/architecture.png" />
 </Frame>
 
@@ -198,16 +202,24 @@ doc_ref.set(user.model_dump())
 
 ## Design Goals
 
-Typesync is built on three foundational principles that guide its design and functionality.
+Typesync is built on three core principles that guide its design and functionality.
 
-### 1. Predictability (dumbness)
+### 1. Predictability
 
-Typesync doesn't try to outsmart you. There are no "gotchas", no hidden configurations, no implicit assumptions. When faced with bad parameters, Typesync prefers to issue an error rather than make assumptions and try to make the most of the situation. The simple reason behind this is that we believe developer tools should not have any unexpected behaviour even if that behaviour may be considered useful for a subset of developers. This predictability means that you always know what to expect from Typesync as it does only what it promises to do. Nothing more, nothing less.
+Typesync values straightforward operation over complexity. It doesn't try to outsmart you by making implicit assumptions. There are no "gotchas", no hidden configurations. When faced with bad parameters, Typesync prefers to issue an error rather than make assumptions and try to make the most of the situation.
+
+Our philosophy is straightforward: developer tools should consistently perform as expected, without any surprising behavior—even if such behavior might be seen as beneficial to some. Essentially, tools should remain "dumb" in their operations, even while performing complex tasks.
+
+The predictability that this behavior produces means that you always know what to expect from Typesync as it does only what it promises to do. Nothing more, nothing less.
 
 ### 2. Ejectability
 
-Flexibility is at the heart of Typesync's design. One of Typesync's key advantages is its non-intrusive nature. There is no "lock-in". Typesync is not a library that tightly attaches itself to your code. You can eject at any time by simply copy-pasting the generated output into your source code without having to refactor your code. Moving away from Typesync is as simple as integrating it.
+Flexibility is central to Typesync's design. It's developed to be non-intrusive, with no lock-in effects. You can easily integrate Typesync into your projects without major changes to your codebase.
+
+Typesync _is not_ a library that tightly attaches itself to your code. You can eject at any time by simply copy-pasting the generated output into your source code without having to refactor your code. Moving away from Typesync is as simple as integrating it.
 
 ### 3. Configurability
 
-Everything that can be reasonably expected to be configurable is made explicitly configurable by Typesync. Whether it's defining how your schema is structured or customizing the output for different programming languages, Typesync provides you with the flexibility to make those decisions. Typesync is designed to be as customizable as possible, allowing you to tailor the tool to your project's requirements.
+Everything that can be reasonably expected to be configurable is made explicitly configurable by Typesync. Whether it's defining how your schema is structured or customizing the output for different programming languages, Typesync provides you with the flexibility to make those decisions.
+
+Typesync is designed to be as customizable as possible, allowing you to tailor the tool to your project's requirements.
