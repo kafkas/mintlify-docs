@@ -12,8 +12,11 @@ typesync generate --definition <filePathOrPattern> --platform <platform> --outFi
 ```
 
 <ParamField type="string" path="filePathOrPattern" required>
-  The exact path or a Glob pattern to the definition file or files. Each
-  definition file must be a YAML or JSON file containing model definitions.
+The exact path or a Glob pattern to the definition file or files. Each definition file must be a YAML or JSON file containing model definitions.
+
+- Example single file path: `definition/models.yml`
+- Example Glob pattern: `'definition/**/*.yml'`
+
 </ParamField>
 
 <ParamField type="string" path="platform" required>
@@ -23,6 +26,7 @@ typesync generate --definition <filePathOrPattern> --platform <platform> --outFi
 - `ts:firebase-admin:11`
 - `ts:firebase:10`
 - `ts:firebase:9`
+- `swift:firebase:10`
 - `py:firebase-admin:6`
 
 </ParamField>
@@ -31,8 +35,10 @@ typesync generate --definition <filePathOrPattern> --platform <platform> --outFi
   The path to the output file.
 </ParamField>
 
-<ParamField type="int" path="indentation">
+<ParamField type="int" path="indentation" default={4}>
   Indentation or tab width for the generated code.
 </ParamField>
 
-<ParamField type="boolean" path="debug">Whether to enable debug logs.</ParamField>
+<ParamField type="boolean" path="debug" default={false}>
+  Whether to enable debug logs.
+</ParamField>
