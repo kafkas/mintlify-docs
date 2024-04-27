@@ -8,10 +8,10 @@ Generates the type definitions for a given Typesync schema and target platform.
 ## Usage
 
 ```bash
-typesync generate --definition <filePathOrPattern> --platform <platform> --outFile <filePath> --indentation <indentation> --debug <debug>
+typesync generate --definition <filePathOrPattern> --platform <platform> --outFile <filePath> --indentation <indentation> --customPydanticBase <classImportPath> --debug <debug>
 ```
 
-<ParamField type="string" path="filePathOrPattern" required>
+<ParamField type="string" path="definition" required>
 The exact path or a Glob pattern to the definition file or files. Each definition file must be a YAML or JSON file containing model definitions.
 
 - Example single file path: `definition/models.yml`
@@ -37,6 +37,16 @@ The exact path or a Glob pattern to the definition file or files. Each definitio
 
 <ParamField type="int" path="indentation" default={4}>
   Indentation or tab width for the generated code.
+</ParamField>
+
+<ParamField type="string" path="customPydanticBase">
+  The base Pydantic class from which all the generated Python models will extend. Must be in the format `x.y.ModelName`. If this is not provided, the generated models will extend from `pydantic.BaseModel`.
+
+Example values:
+
+- `custom.MyModel`
+- `a.b.c.MyCustomModel`
+
 </ParamField>
 
 <ParamField type="boolean" path="debug" default={false}>
