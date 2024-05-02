@@ -59,7 +59,13 @@
     },
     {
       "group": "CLI Reference",
-      "pages": ["cli/generate", "cli/validate"]
+      "pages": [
+        "cli/generate-ts",
+        "cli/generate-swift",
+        "cli/generate-py",
+        "cli/generate-rules",
+        "cli/validate"
+      ]
     }
   ],
   "footerSocials": {
