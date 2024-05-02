@@ -57,17 +57,17 @@ User:
 
 ## Step 3: Generate type definitions
 
-You can now run `typesync generate` to generate the types for the relevant platform. For example, if your project is a Node.js backend that uses Firebase Admin SDK (version 11), run the following command:
+You can now generate the types for the relevant platform. For example, if your project is a Node.js backend that uses Firebase Admin SDK (version 11), run the following command:
 
 ```bash
-typesync generate --definition 'definition/**/*.yml' --platform ts:firebase-admin:11 --outFile models.ts
+typesync generate-ts --definition 'definition/**/*.yml' --platform ts:firebase-admin:11 --outFile models.ts
 ```
 
 This command tells Typesync to:
 
-- search for all `.yml` files in the `definition` directory
-- generate TypeScript interfaces for use with Firebase Admin SDK (version 11)
-- output the generated interfaces to a file named `models.ts`
+- accept all `.yml` files in the `definition` directory as the schema definition
+- generate TypeScript interfaces for use with the Firebase Admin SDK (version 11)
+- write the generated types to the `models.ts` file in the current directory
 
 Here's what the generated TypeScript file might look like:
 
