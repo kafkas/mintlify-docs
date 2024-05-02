@@ -3,6 +3,8 @@ title: "validate"
 icon: "rectangle-terminal"
 ---
 
+import DefinitionOptionSnippet from '/snippets/definition-option.mdx';
+
 Validates a given Typesync definition.
 
 ## Usage
@@ -11,10 +13,6 @@ Validates a given Typesync definition.
 typesync validate --definition <filePathOrPattern> --debug <debug>
 ```
 
-<ParamField type="string" path="filePathOrPattern" required>
-  The exact path or a Glob pattern to the definition file or files. Each
-  definition file must be a YAML file containing model definitions.
-</ParamField>
-
+<DefinitionOptionSnippet />
 
 <ParamField type="boolean" path="debug">Whether to enable debug logs.</ParamField>

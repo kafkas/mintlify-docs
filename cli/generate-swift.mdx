@@ -3,6 +3,8 @@ title: "generate-swift"
 icon: "rectangle-terminal"
 ---
 
+import DefinitionOptionSnippet from '/snippets/definition-option.mdx';
+
 Generates the type definitions for a given Typesync schema and target platform.
 
 ## Usage
@@ -11,13 +13,7 @@ Generates the type definitions for a given Typesync schema and target platform.
 typesync generate-swift --definition <filePathOrPattern> --platform <platform> --outFile <filePath> --indentation <indentation> --customPydanticBase <classImportPath> --debug <debug>
 ```
 
-<ParamField type="string" path="definition" required>
-The exact path or a Glob pattern to the definition file or files. Each definition file must be a YAML or JSON file containing model definitions.
-
-- Example single file path: `definition/models.yml`
-- Example Glob pattern: `'definition/**/*.yml'`
-
-</ParamField>
+<DefinitionOptionSnippet />
 
 <ParamField type="string" path="platform" required>
   Target platform and version. The available platforms are:
