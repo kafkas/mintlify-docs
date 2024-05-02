@@ -54,10 +54,6 @@
       "pages": ["schema/definition", "schema/types"]
     },
     {
-      "group": "Target Platforms",
-      "pages": ["platforms/typescript", "platforms/python", "platforms/swift"]
-    },
-    {
       "group": "CLI Reference",
       "pages": [
         "cli/generate-ts",
@@ -66,6 +62,10 @@
         "cli/generate-rules",
         "cli/validate"
       ]
+    },
+    {
+      "group": "Target Platforms",
+      "pages": ["platforms/typescript", "platforms/python", "platforms/swift"]
     }
   ],
   "footerSocials": {
