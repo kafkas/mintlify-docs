@@ -3,14 +3,14 @@ title: "generate-rules"
 icon: "rectangle-terminal"
 ---
 
-import DefinitionOptionSnippet from '/snippets/definition-option.mdx';
+import DefinitionOptionSnippet from "/snippets/definition-option.mdx";
 
-Generates the type definitions for a given Typesync schema and target platform.
+Generates validator functions for Firestore Security Rules and injects them into the specified file.
 
 ## Usage
 
 ```bash
-typesync generate-rules --definition <filePathOrPattern> --platform <platform> --outFile <filePath> --indentation <indentation> --customPydanticBase <classImportPath> --debug <debug>
+typesync generate-rules --definition <filePathOrPattern> --platform <platform> --outFile <filePath> --startMarker <startMarker> --endMarker <endMarker> --validatorNamePattern <validatorNamePattern> --validatorParamName <validatorParamName> --indentation <indentation> --debug <debug>
 ```
 
 <DefinitionOptionSnippet />
@@ -18,12 +18,7 @@ typesync generate-rules --definition <filePathOrPattern> --platform <platform> -
 <ParamField type="string" path="platform" required>
   Target platform and version. The available platforms are:
 
-- `ts:firebase-admin:12`
-- `ts:firebase-admin:11`
-- `ts:firebase:10`
-- `ts:firebase:9`
-- `swift:firebase:10`
-- `py:firebase-admin:6`
+- `rules:2`
 
 </ParamField>
 
@@ -31,18 +26,37 @@ typesync generate-rules --definition <filePathOrPattern> --platform <platform> -
   The path to the output file.
 </ParamField>
 
-<ParamField type="int" path="indentation" default={2}>
-  Indentation or tab width for the generated code.
+<ParamField type="string" path="startMarker" default="typesync-start">
+  A marker that indicates the line after which the generated code should be
+  inserted.
 </ParamField>
 
-<ParamField type="string" path="customPydanticBase">
-  The base Pydantic class from which all the generated Python models will extend. Must be in the format `x.y.ModelName`. If this is not provided, the generated models will extend from `pydantic.BaseModel`.
+<ParamField type="string" path="endMarker" default="typesync-end">
+  A marker that indicates the line before which the generated code should be
+  inserted.
+</ParamField>
 
-Example values:
+<ParamField
+  type="string"
+  path="validatorNamePattern"
+  default="isValid{modelName}"
+>
+  The pattern that specifies how the validators are named. The string must
+  contain the `{modelName}` substring (this is a literal value). For example,
+  providing `isValid{modelName}` ensures that the generated validators are given
+  names like `isValidUser`, `isValidProject` etc.
+</ParamField>
 
-- `custom.MyModel`
-- `a.b.c.MyCustomModel`
+<ParamField
+  type="string"
+  path="validatorParamName"
+  default="data"
+>
+  The name of the parameter taken by each type validator.
+</ParamField>
 
+<ParamField type="int" path="indentation" default={2}>
+  Indentation or tab width for the generated code.
 </ParamField>
 
 <ParamField type="boolean" path="debug" default={false}>

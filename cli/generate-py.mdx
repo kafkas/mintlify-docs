@@ -5,7 +5,7 @@ icon: "rectangle-terminal"
 
 import DefinitionOptionSnippet from '/snippets/definition-option.mdx';
 
-Generates the type definitions for a given Typesync schema and target platform.
+Generates Python/Pydantic type definitions for the specified schema and writes them to the specified file.
 
 ## Usage
 
@@ -18,11 +18,6 @@ typesync generate-py --definition <filePathOrPattern> --platform <platform> --ou
 <ParamField type="string" path="platform" required>
   Target platform and version. The available platforms are:
 
-- `ts:firebase-admin:12`
-- `ts:firebase-admin:11`
-- `ts:firebase:10`
-- `ts:firebase:9`
-- `swift:firebase:10`
 - `py:firebase-admin:6`
 
 </ParamField>

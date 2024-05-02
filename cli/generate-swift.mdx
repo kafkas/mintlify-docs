@@ -3,14 +3,14 @@ title: "generate-swift"
 icon: "rectangle-terminal"
 ---
 
-import DefinitionOptionSnippet from '/snippets/definition-option.mdx';
+import DefinitionOptionSnippet from "/snippets/definition-option.mdx";
 
-Generates the type definitions for a given Typesync schema and target platform.
+Generates Swift type definitions for the specified schema and writes them to the specified file.
 
 ## Usage
 
 ```bash
-typesync generate-swift --definition <filePathOrPattern> --platform <platform> --outFile <filePath> --indentation <indentation> --customPydanticBase <classImportPath> --debug <debug>
+typesync generate-swift --definition <filePathOrPattern> --platform <platform> --outFile <filePath> --indentation <indentation> --debug <debug>
 ```
 
 <DefinitionOptionSnippet />
@@ -18,12 +18,7 @@ typesync generate-swift --definition <filePathOrPattern> --platform <platform> -
 <ParamField type="string" path="platform" required>
   Target platform and version. The available platforms are:
 
-- `ts:firebase-admin:12`
-- `ts:firebase-admin:11`
-- `ts:firebase:10`
-- `ts:firebase:9`
 - `swift:firebase:10`
-- `py:firebase-admin:6`
 
 </ParamField>
 
@@ -33,16 +28,6 @@ typesync generate-swift --definition <filePathOrPattern> --platform <platform> -
 
 <ParamField type="int" path="indentation" default={2}>
   Indentation or tab width for the generated code.
-</ParamField>
-
-<ParamField type="string" path="customPydanticBase">
-  The base Pydantic class from which all the generated Python models will extend. Must be in the format `x.y.ModelName`. If this is not provided, the generated models will extend from `pydantic.BaseModel`.
-
-Example values:
-
-- `custom.MyModel`
-- `a.b.c.MyCustomModel`
-
 </ParamField>
 
 <ParamField type="boolean" path="debug" default={false}>
