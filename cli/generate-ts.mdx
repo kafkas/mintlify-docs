@@ -6,6 +6,7 @@ icon: "rectangle-terminal"
 import DefinitionOption from "/snippets/cli-option-definition.mdx";
 import OutFileOption from "/snippets/cli-option-out-file.mdx";
 import TargetOption from "/snippets/cli-option-target.mdx";
+import IndentationOption from "/snippets/cli-option-indentation.mdx";
 import DebugOption from "/snippets/cli-option-debug.mdx";
 
 Generates TypeScript type definitions for the specified schema and writes them to the specified file.
@@ -21,11 +22,7 @@ typesync generate-ts --definition <filePathOrPattern> --target <targetEnvironmen
 <DefinitionOption />
 <TargetOption />
 <OutFileOption />
-
-<ParamField type="int" path="indentation" default={2}>
-  Indentation or tab width for the generated code.
-</ParamField>
-
+<IndentationOption />
 <DebugOption />
 
 ## Targets
