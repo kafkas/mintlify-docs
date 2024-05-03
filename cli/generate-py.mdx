@@ -24,7 +24,7 @@ typesync generate-py --definition <filePathOrPattern> --target <targetEnvironmen
 <OutFileOption />
 
 <ParamField type="string" path="customPydanticBase">
-  The base Pydantic class from which all the generated Python models will extend. Must be in the format `x.y.ModelName`. If this is not provided, the generated models will extend from `pydantic.BaseModel`.
+The base class from which all the generated Python models will extend. The base class must extend `pydantic.BaseModel` and the option must be provided in the format `x.y.ModelName`. If this option is not provided, the generated models will extend from `pydantic.BaseModel`.
 
 Example values:
 
