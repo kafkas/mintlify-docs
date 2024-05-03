@@ -3,7 +3,7 @@ title: "generate-ts"
 icon: "rectangle-terminal"
 ---
 
-import DefinitionOptionSnippet from '/snippets/definition-option.mdx';
+import DefinitionOption from "/snippets/cli-option-definition.mdx";
 
 Generates TypeScript type definitions for the specified schema and writes them to the specified file.
 
@@ -13,7 +13,9 @@ Generates TypeScript type definitions for the specified schema and writes them t
 typesync generate-ts --definition <filePathOrPattern> --target <targetEnvironment> --outFile <filePath> --indentation <indentation> --debug <debug>
 ```
 
-<DefinitionOptionSnippet />
+## Options
+
+<DefinitionOption />
 
 <ParamField type="string" path="target" required>
   The target environment for which the types are generated. This option specifies the target SDK and version, ensuring that the output is compatible with the chosen environment. The available targets are:

@@ -3,7 +3,7 @@ title: "generate-rules"
 icon: "rectangle-terminal"
 ---
 
-import DefinitionOptionSnippet from "/snippets/definition-option.mdx";
+import DefinitionOption from "/snippets/cli-option-definition.mdx";
 
 Generates type validator functions for Firestore Security Rules (version 2) and injects them into the specified file.
 
@@ -13,7 +13,9 @@ Generates type validator functions for Firestore Security Rules (version 2) and 
 typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --startMarker <startMarker> --endMarker <endMarker> --validatorNamePattern <validatorNamePattern> --validatorParamName <validatorParamName> --indentation <indentation> --debug <debug>
 ```
 
-<DefinitionOptionSnippet />
+## Options
+
+<DefinitionOption />
 
 <ParamField type="string" path="outFile" required>
   The path to the output file.
