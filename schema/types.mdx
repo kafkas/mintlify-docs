@@ -27,6 +27,10 @@ import typing
 Example = typing.Any
 ```
 
+```swift models.swift
+typealias Example = Any
+```
+
 </CodeGroup>
 
 ## `nil`
@@ -71,6 +75,10 @@ export type Example = string;
 Example = str
 ```
 
+```swift models.swift
+typealias Example = String
+```
+
 </CodeGroup>
 
 ## `boolean`
@@ -91,6 +99,10 @@ export type Example = boolean;
 
 ```python models.py
 Example = bool
+```
+
+```swift models.swift
+typealias Example = Bool
 ```
 
 </CodeGroup>
@@ -115,6 +127,10 @@ export type Example = number;
 Example = int
 ```
 
+```swift models.swift
+typealias Example = Int
+```
+
 </CodeGroup>
 
 ## `double`
@@ -135,6 +151,10 @@ export type Example = number;
 
 ```python models.py
 Example = float
+```
+
+```swift models.swift
+typealias Example = Double
 ```
 
 </CodeGroup>
@@ -161,6 +181,10 @@ import datetime
 Example = datetime.datetime
 ```
 
+```swift models.swift
+typealias Example = Date
+```
+
 </CodeGroup>
 
 ## `literal`
@@ -185,6 +209,10 @@ export type MeaningOfLife = 42;
 import typing
 
 MeaningOfLife = typing.Literal[42]
+```
+
+```swift models.swift
+typealias MeaningOfLife = Int
 ```
 
 </CodeGroup>
@@ -223,6 +251,14 @@ class UserRole(enum.Enum):
     Member = "member"
 ```
 
+```swift models.swift
+enum UserRole: String, Codable {
+  case Owner = "owner"
+  case Admin = "admin"
+  case Member = "member"
+}
+```
+
 </CodeGroup>
 
 ## `tuple`
@@ -250,6 +286,10 @@ export type Example = [string, boolean, number];
 Example = tuple[str, bool, int]
 ```
 
+```swift models.swift
+typealias Example = (String, Bool, Int)
+```
+
 </CodeGroup>
 
 ## `list`
@@ -272,6 +312,10 @@ export type Example = string[];
 
 ```python models.py
 Example = typing.List[str]
+```
+
+```swift models.swift
+typealias Example = [String]
 ```
 
 </CodeGroup>
@@ -298,6 +342,10 @@ export type Example = Record<string, number>;
 import typing
 
 Example = typing.Dict[str, int]
+```
+
+```swift models.swift
+typealias Example = [String: Int]
 ```
 
 </CodeGroup>
@@ -340,6 +388,20 @@ class Example(TypesyncModel):
 # ...
 ```
 
+```swift models.swift
+struct Example: Codable {
+  var name: String
+  var completed: Bool
+  var githubUrl: String?
+
+  private enum CodingKeys: String, CodingKey {
+    case name
+    case completed
+    case githubUrl = "github_url"
+  }
+}
+```
+
 </CodeGroup>
 
 ## `union`
@@ -367,6 +429,39 @@ export type Path = string | string[];
 
 ```python models.py
 Path = typing.Union[str, typing.List[str]]
+```
+
+```swift models.swift
+enum Example: Codable {
+  case variant1(String)
+  case variant2([String])
+
+  private enum CodingKeys: String, CodingKey {
+    case variant1
+    case variant2
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    if let variant1 = try? container.decode(String.self) {
+      self = .variant1(variant1)
+    } else if let variant2 = try? container.decode([String].self) {
+      self = .variant2(variant2)
+    } else {
+      throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Failed to decode ExampleSimpleUnion value."))
+    }
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
+    switch self {
+    case .variant1(let val):
+      try container.encode(val)
+    case .variant2(let val):
+      try container.encode(val)
+    }
+  }
+}
 ```
 
 </CodeGroup>
@@ -448,6 +543,63 @@ class Dog(TypesyncModel):
 Pet = Annotated[typing.Union[Cat, Dog], pydantic.Field(discriminator='type')]
 ```
 
+```swift models.swift
+struct Cat: Codable {
+  private(set) var type: String = "cat"
+  var name: String
+  var livesLeft: Int
+
+  private enum CodingKeys: String, CodingKey {
+    case type
+    case name
+    case livesLeft = "lives_left"
+  }
+}
+
+struct Dog: Codable {
+  private(set) var type: String = "dog"
+  var name: String
+  var breed: String
+}
+
+enum Pet: Codable {
+  case cat(Cat)
+  case dog(Dog)
+
+  private enum CodingKeys: String, CodingKey {
+    case type
+  }
+
+  enum PetType: String, Codable {
+    case cat
+    case dog
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let type = try container.decode(PetType.self, forKey: .type)
+    switch type {
+    case .cat:
+      self = .cat(try Cat(from: decoder))
+    case .dog:
+      self = .dog(try Dog(from: decoder))
+    }
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    switch self {
+    case .cat(let obj):
+      try container.encode(PetType.cat.rawValue, forKey: .type)
+      try obj.encode(to: encoder)
+    case .dog(let obj):
+      try container.encode(PetType.dog.rawValue, forKey: .type)
+      try obj.encode(to: encoder)
+    }
+  }
+}
+```
+
 </CodeGroup>
 
 ## `alias`
@@ -487,6 +639,20 @@ class User(TypesyncModel):
     name_last: str
 
 WorkspaceMember = User
+```
+
+```swift models.swift
+struct User: Codable {
+  var nameFirst: String
+  var nameLast: String
+
+  private enum CodingKeys: String, CodingKey {
+    case nameFirst = "name_first"
+    case nameLast = "name_last"
+  }
+}
+
+typealias WorkspaceMember = User
 ```
 
 </CodeGroup>
