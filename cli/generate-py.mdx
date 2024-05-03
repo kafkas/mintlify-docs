@@ -4,6 +4,8 @@ icon: "rectangle-terminal"
 ---
 
 import DefinitionOption from "/snippets/cli-option-definition.mdx";
+import OutFileOption from "/snippets/cli-option-out-file.mdx";
+import TargetOption from "/snippets/cli-option-target.mdx";
 
 Generates Python/Pydantic type definitions for the specified schema and writes them to the specified file.
 
@@ -16,17 +18,8 @@ typesync generate-py --definition <filePathOrPattern> --target <targetEnvironmen
 ## Options
 
 <DefinitionOption />
-
-<ParamField type="string" path="target" required>
-  The target environment for which the types are generated. This option specifies the target SDK and version, ensuring that the output is compatible with the chosen environment. The available targets are:
-
-- `firebase-admin@6`
-
-</ParamField>
-
-<ParamField type="string" path="outFile" required>
-  The path to the output file.
-</ParamField>
+<TargetOption />
+<OutFileOption />
 
 <ParamField type="int" path="indentation" default={2}>
   Indentation or tab width for the generated code.
@@ -45,3 +38,7 @@ Example values:
 <ParamField type="boolean" path="debug" default={false}>
   Whether to enable debug logs.
 </ParamField>
+
+## Targets
+
+- `firebase-admin@6`: For Python projects that rely on the [Firebase Admin Python SDK (v6)](https://github.com/firebase/firebase-admin-python).

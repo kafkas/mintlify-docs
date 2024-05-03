@@ -4,6 +4,7 @@ icon: "rectangle-terminal"
 ---
 
 import DefinitionOption from "/snippets/cli-option-definition.mdx";
+import OutFileOption from "/snippets/cli-option-out-file.mdx";
 
 Generates type validator functions for Firestore Security Rules (version 2) and injects them into the specified file.
 
@@ -16,10 +17,7 @@ typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --
 ## Options
 
 <DefinitionOption />
-
-<ParamField type="string" path="outFile" required>
-  The path to the output file.
-</ParamField>
+<OutFileOption />
 
 <ParamField type="string" path="startMarker" default="typesync-start">
   A marker that indicates the line after which the generated code should be

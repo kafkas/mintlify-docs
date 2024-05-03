@@ -4,6 +4,8 @@ icon: "rectangle-terminal"
 ---
 
 import DefinitionOption from "/snippets/cli-option-definition.mdx";
+import OutFileOption from "/snippets/cli-option-out-file.mdx";
+import TargetOption from "/snippets/cli-option-target.mdx";
 
 Generates Swift type definitions for the specified schema and writes them to the specified file.
 
@@ -16,17 +18,8 @@ typesync generate-swift --definition <filePathOrPattern> --target <targetEnviron
 ## Options
 
 <DefinitionOption />
-
-<ParamField type="string" path="target" required>
-  The target environment for which the types are generated. This option specifies the target SDK and version, ensuring that the output is compatible with the chosen environment. The available targets are:
-
-- `firebase@10`
-
-</ParamField>
-
-<ParamField type="string" path="outFile" required>
-  The path to the output file.
-</ParamField>
+<TargetOption />
+<OutFileOption />
 
 <ParamField type="int" path="indentation" default={2}>
   Indentation or tab width for the generated code.
@@ -35,3 +28,7 @@ typesync generate-swift --definition <filePathOrPattern> --target <targetEnviron
 <ParamField type="boolean" path="debug" default={false}>
   Whether to enable debug logs.
 </ParamField>
+
+## Targets
+
+- `firebase@10`: For Swift projects that rely on the [Firebase Apple SDK (v10)](https://github.com/firebase/firebase-ios-sdk).
