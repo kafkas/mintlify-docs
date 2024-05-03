@@ -7,6 +7,7 @@ import ExampleGenerationTSFrontend from "/snippets/example-generation-ts-fronten
 import ExampleGenerationTSBackend from "/snippets/example-generation-ts-backend.mdx";
 import ExampleGenerationPython from "/snippets/example-generation-py.mdx";
 import ExampleGenerationSwift from "/snippets/example-generation-swift.mdx";
+import ExampleGenerationRules from "/snippets/example-generation-rules.mdx";
 
 import ExampleUsageTSFrontend from "/snippets/example-usage-ts-frontend.mdx";
 import ExampleUsageTSBackend from "/snippets/example-usage-ts-backend.mdx";
@@ -32,7 +33,7 @@ In the example below, we define our models in `models.yml`.
 
 <ExampleDefinition />
 
-We then run the following commands to generate type definitions for four different environments:
+We then run the following commands to generate type definitions for four different environments and type validators for Security Rules:
 
 <CodeGroup>
 
@@ -52,6 +53,10 @@ typesync generate-py --target firebase-admin@6 --definition models.yml # ... oth
 typesync generate-swift --target firebase@10 --definition models.yml # ... other options
 ```
 
+```bash Security Rules
+typesync generate-rules --definition models.yml # ... other options
+```
+
 </CodeGroup>
 
 Typesync generates the following files:
@@ -61,9 +66,10 @@ Typesync generates the following files:
   <ExampleGenerationTSBackend />
   <ExampleGenerationPython />
   <ExampleGenerationSwift />
+  <ExampleGenerationRules />
 </CodeGroup>
 
-Once we have the generated models, we can import and use them in our application code.
+Once we have the generated models, we can import and use them in our application code. As for Security Rules, we just need to deploy them to Firestore.
 
 <CodeGroup>
   <ExampleUsageTSFrontend />
