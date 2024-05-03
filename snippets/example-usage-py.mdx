@@ -1,0 +1,13 @@
+```python app.py
+from firebase_admin import credentials, firestore, initialize_app
+from models import User, UserRole
+
+service_account_path = './service-account.json'
+cred = credentials.Certificate(service_account_path)
+initialize_app(cred)
+db = firestore.client()
+
+doc_ref = db.collection('users').document('adam')
+snapshot = doc_ref.get()
+user = User.model_validate(snapshot.to_dict()) # is a User instance
+```

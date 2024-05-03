@@ -6,6 +6,12 @@ import ExampleDefinition from "/snippets/example-definition.mdx";
 import ExampleGenerationTSFrontend from "/snippets/example-generation-ts-frontend.mdx";
 import ExampleGenerationTSBackend from "/snippets/example-generation-ts-backend.mdx";
 import ExampleGenerationPython from "/snippets/example-generation-py.mdx";
+import ExampleGenerationSwift from "/snippets/example-generation-swift.mdx";
+
+import ExampleUsageTSFrontend from "/snippets/example-usage-ts-frontend.mdx";
+import ExampleUsageTSBackend from "/snippets/example-usage-ts-backend.mdx";
+import ExampleUsageSwift from "/snippets/example-usage-swift.mdx";
+import ExampleUsagePython from "/snippets/example-usage-py.mdx";
 
 Typesync is an open-source schema management tool that simplifies managing [Firestore](https://cloud.google.com/firestore) databases. Typesync allows you to maintain a single source of truth for your Firestore architecture in a special _schema_. With this schema in place, you can seamlessly auto-generate type definitions for multiple platforms like TypeScript, Python, Swift, and more using the CLI tool.
 
@@ -26,7 +32,7 @@ In the example below, we define our models in `models.yml`.
 
 <ExampleDefinition />
 
-We then run the following commands to generate types for 3 different targets:
+We then run the following commands to generate type definitions for four different environments:
 
 <CodeGroup>
 
@@ -42,6 +48,10 @@ typesync generate-ts --target firebase-admin@11 --definition models.yml # ... ot
 typesync generate-py --target firebase-admin@6 --definition models.yml # ... other options
 ```
 
+```bash Swift
+typesync generate-swift --target firebase@10 --definition models.yml # ... other options
+```
+
 </CodeGroup>
 
 Typesync generates the following files:
@@ -50,61 +60,18 @@ Typesync generates the following files:
   <ExampleGenerationTSFrontend />
   <ExampleGenerationTSBackend />
   <ExampleGenerationPython />
+  <ExampleGenerationSwift />
 </CodeGroup>
 
 Once we have the generated models, we can import and use them in our application code.
 
 <CodeGroup>
 
-```ts app.ts (frontend)
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  collection,
-  type CollectionReference,
-} from "firebase/firestore";
-import type { User } from "./models";
+<ExampleUsageTSFrontend />
+<ExampleUsageTSBackend />
+<ExampleUsagePython />
+<ExampleUsageSwift />
 
-const firestore = getFirestore();
-const usersColRef = collection(firestore, "users") as CollectionReference<User>;
-const userDocRef = doc(usersColRef, "adam");
-const userSnap = await getDoc(userDocRef);
-const user = userSnap.data(); // is a User object (or undefined)
-```
-
-```ts app.ts (backend)
-import { firestore } from "firebase-admin";
-import type { User } from "./models";
-
-const usersColRef = firestore().collection(
-  "users"
-) as firestore.CollectionReference<User>;
-const userSnap = await usersColRef.doc("adam").get();
-const user = userSnap.data(); // is a User object (or undefined)
-```
-
-```python app.py
-import firebase_admin
-from datetime import datetime
-from models import User, UserRole
-
-def initialize_firestore():
-    service_account_path = './service-account.json'
-    cred = credentials.Certificate(service_account_path)
-    firebase_admin.initialize_app(cred)
-    return firestore.client()
-
-db = initialize_firestore()
-
-user = User(
-    username="johnappleseed",
-    role=UserRole.Owner,
-    created_at=datetime.now()
-)
-doc_ref = db.collection('users').document("adam")
-doc_ref.set(user.model_dump())
-```
 
 </CodeGroup>
 
