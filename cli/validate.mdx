@@ -4,6 +4,8 @@ icon: "rectangle-terminal"
 ---
 
 import DefinitionOption from "/snippets/cli-option-definition.mdx";
+import DebugOption from "/snippets/cli-option-debug.mdx";
+
 
 Checks if the specified schema definition is syntactically valid.
 
@@ -16,7 +18,4 @@ typesync validate --definition <filePathOrPattern> --debug <debug>
 ## Options
 
 <DefinitionOption />
-
-<ParamField type="boolean" path="debug">
-  Whether to enable debug logs.
-</ParamField>
+<DebugOption />

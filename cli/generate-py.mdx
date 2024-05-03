@@ -6,6 +6,7 @@ icon: "rectangle-terminal"
 import DefinitionOption from "/snippets/cli-option-definition.mdx";
 import OutFileOption from "/snippets/cli-option-out-file.mdx";
 import TargetOption from "/snippets/cli-option-target.mdx";
+import DebugOption from "/snippets/cli-option-debug.mdx";
 
 Generates Python/Pydantic type definitions for the specified schema and writes them to the specified file.
 
@@ -35,9 +36,7 @@ Example values:
 
 </ParamField>
 
-<ParamField type="boolean" path="debug" default={false}>
-  Whether to enable debug logs.
-</ParamField>
+<DebugOption />
 
 ## Targets
 

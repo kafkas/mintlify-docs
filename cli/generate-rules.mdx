@@ -5,6 +5,7 @@ icon: "rectangle-terminal"
 
 import DefinitionOption from "/snippets/cli-option-definition.mdx";
 import OutFileOption from "/snippets/cli-option-out-file.mdx";
+import DebugOption from "/snippets/cli-option-debug.mdx";
 
 Generates type validator functions for Firestore Security Rules (version 2) and injects them into the specified file.
 
@@ -51,6 +52,4 @@ typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --
   Indentation or tab width for the generated code.
 </ParamField>
 
-<ParamField type="boolean" path="debug" default={false}>
-  Whether to enable debug logs.
-</ParamField>
+<DebugOption />
