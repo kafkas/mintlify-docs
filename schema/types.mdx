@@ -31,6 +31,12 @@ Example = typing.Any
 typealias Example = Any
 ```
 
+```javascript firestore.rules
+function isValidExample(data) {
+  return true;
+}
+```
+
 </CodeGroup>
 
 ## `nil`
@@ -51,6 +57,12 @@ export type Example = null;
 
 ```python models.py
 Example = None
+```
+
+```javascript firestore.rules
+function isValidExample(data) {
+  return true;
+}
 ```
 
 </CodeGroup>
@@ -79,6 +91,12 @@ Example = str
 typealias Example = String
 ```
 
+```javascript firestore.rules
+function isValidExample(data) {
+  return (data is string);
+}
+```
+
 </CodeGroup>
 
 ## `boolean`
@@ -103,6 +121,12 @@ Example = bool
 
 ```swift models.swift
 typealias Example = Bool
+```
+
+```javascript firestore.rules
+function isValidExample(data) {
+  return (data is bool);
+}
 ```
 
 </CodeGroup>
@@ -131,6 +155,12 @@ Example = int
 typealias Example = Int
 ```
 
+```javascript firestore.rules
+function isValidExample(data) {
+  return (data is int);
+}
+```
+
 </CodeGroup>
 
 ## `double`
@@ -155,6 +185,12 @@ Example = float
 
 ```swift models.swift
 typealias Example = Double
+```
+
+```javascript firestore.rules
+function isValidExample(data) {
+  return (data is float);
+}
 ```
 
 </CodeGroup>
@@ -185,6 +221,12 @@ Example = datetime.datetime
 typealias Example = Date
 ```
 
+```javascript firestore.rules
+function isValidExample(data) {
+  return (data is timestamp);
+}
+```
+
 </CodeGroup>
 
 ## `literal`
@@ -213,6 +255,12 @@ MeaningOfLife = typing.Literal[42]
 
 ```swift models.swift
 typealias MeaningOfLife = Int
+```
+
+```javascript firestore.rules
+function isValidMeaningOfLife(data) {
+  return (data == 42);
+}
 ```
 
 </CodeGroup>
@@ -259,6 +307,12 @@ enum UserRole: String, Codable {
 }
 ```
 
+```javascript firestore.rules
+function isValidUserRole(data) {
+  return ((data == 'owner') || (data == 'admin') || (data == 'member'));
+}
+```
+
 </CodeGroup>
 
 ## `tuple`
@@ -290,6 +344,12 @@ Example = tuple[str, bool, int]
 typealias Example = (String, Bool, Int)
 ```
 
+```javascript firestore.rules
+function isValidExample(data) {
+  return ((data is list) && (data[0] is string) && (data[1] is bool) && (data[2] is int));
+}
+```
+
 </CodeGroup>
 
 ## `list`
@@ -316,6 +376,12 @@ Example = typing.List[str]
 
 ```swift models.swift
 typealias Example = [String]
+```
+
+```javascript firestore.rules
+function isValidExample(data) {
+  return (data is list);
+}
 ```
 
 </CodeGroup>
@@ -346,6 +412,12 @@ Example = typing.Dict[str, int]
 
 ```swift models.swift
 typealias Example = [String: Int]
+```
+
+```javascript firestore.rules
+function isValidExample(data) {
+  return (data is map);
+}
 ```
 
 </CodeGroup>
@@ -399,6 +471,18 @@ struct Example: Codable {
     case completed
     case githubUrl = "github_url"
   }
+}
+```
+
+```javascript firestore.rules
+function isValidExample(data) {
+  return (
+    (data is map) &&
+    (data.keys().hasOnly(['name', 'completed', 'github_url'])) &&
+    (data.name is string) &&
+    (data.completed is bool) &&
+    ((data.github_url is string) || !('github_url' in data))
+  );
 }
 ```
 
@@ -461,6 +545,12 @@ enum Example: Codable {
       try container.encode(val)
     }
   }
+}
+```
+
+```javascript firestore.rules
+function isValidPath(data) {
+  return ((data is string) || (data is list));
 }
 ```
 
@@ -600,6 +690,44 @@ enum Pet: Codable {
 }
 ```
 
+```javascript firestore.rules
+function isValidCat(data) {
+  return (
+    (data is map) &&
+    (data.keys().hasOnly(['type', 'name', 'lives_left'])) &&
+    (data.type == 'cat') &&
+    (data.name is string) &&
+    (data.lives_left is int)
+  );
+}
+
+function isValidDog(data) {
+  return (
+    (data is map) &&
+    (data.keys().hasOnly(['type', 'name', 'breed'])) &&
+    (data.type == 'dog') &&
+    (data.name is string) &&
+    (data.breed is string)
+  );
+}
+
+function isValidPet(data) {
+  return ((
+    (data is map) &&
+    (data.keys().hasOnly(['type', 'name', 'lives_left'])) &&
+    (data.type == 'cat') &&
+    (data.name is string) &&
+    (data.lives_left is int)
+  ) || (
+    (data is map) &&
+    (data.keys().hasOnly(['type', 'name', 'breed'])) &&
+    (data.type == 'dog') &&
+    (data.name is string) &&
+    (data.breed is string)
+  ));
+}
+```
+
 </CodeGroup>
 
 ## `alias`
@@ -653,6 +781,21 @@ struct User: Codable {
 }
 
 typealias WorkspaceMember = User
+```
+
+```javascript firestore.rules
+function isValidUser(data) {
+  return (
+    (data is map) &&
+    (data.keys().hasOnly(['name_first', 'name_last'])) &&
+    (data.name_first is string) &&
+    (data.name_last is string)
+  );
+}
+
+function isValidWorkspaceMember(data) {
+  return isValidUser(data);
+}
 ```
 
 </CodeGroup>
