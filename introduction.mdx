@@ -3,6 +3,9 @@ title: Introduction
 ---
 
 import ExampleDefinition from "/snippets/example-definition.mdx";
+import ExampleGenerationTSFrontend from "/snippets/example-generation-ts-frontend.mdx";
+import ExampleGenerationTSBackend from "/snippets/example-generation-ts-backend.mdx";
+import ExampleGenerationPython from "/snippets/example-generation-py.mdx";
 
 Typesync is an open-source schema management tool that simplifies managing [Firestore](https://cloud.google.com/firestore) databases. Typesync allows you to maintain a single source of truth for your Firestore architecture in a special _schema_. With this schema in place, you can seamlessly auto-generate type definitions for multiple platforms like TypeScript, Python, Swift, and more using the CLI tool.
 
@@ -44,77 +47,9 @@ typesync generate-py --target firebase-admin@6 --definition models.yml # ... oth
 Typesync generates the following files:
 
 <CodeGroup>
-
-```ts models.ts (frontend)
-import type * as firestore from "firebase/firestore";
-
-/**
- * Represents a user's role within a project.
- */
-export type UserRole = "owner" | "admin" | "member";
-
-/**
- * Represents a user that belongs to a project.
- */
-export interface User {
-  /**
-   * A string that uniquely identifies the user within a project.
-   */
-  username: string;
-  role: UserRole;
-  created_at: firestore.Timestamp;
-}
-```
-
-```ts models.ts (backend)
-import { firestore } from "firebase-admin";
-
-/**
- * Represents a user's role within a project.
- */
-export type UserRole = "owner" | "admin" | "member";
-
-/**
- * Represents a user that belongs to a project.
- */
-export interface User {
-  /**
-   * A string that uniquely identifies the user within a project.
-   */
-  username: string;
-  role: UserRole;
-  created_at: firestore.Timestamp;
-}
-```
-
-```python models.py
-from __future__ import annotations
-
-import enum
-import pydantic
-
-# [static declarations redacted for brevity]
-
-class UserRole(enum.Enum):
-    """Represents a user's role within a project."""
-    Owner = "owner"
-    Admin = "admin"
-    Member = "member"
-
-class User(TypesyncModel):
-    """Represents a user that belongs to a project."""
-    username: str
-    """A string that uniquely identifies the user within a project."""
-    role: UserRole
-    created_at: datetime.datetime
-
-    class Config:
-        use_enum_values = True
-
-    def __setattr__(self, name: str, value: typing.Any) -> None:
-        super().__setattr__(name, value)
-```
-
+  <ExampleGenerationTSFrontend />
+  <ExampleGenerationTSBackend />
+  <ExampleGenerationPython />
 </CodeGroup>
 
 Once we have the generated models, we can import and use them in our application code.
