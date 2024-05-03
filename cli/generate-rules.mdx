@@ -41,17 +41,16 @@ typesync generate-rules --definition <filePathOrPattern> --platform <platform> -
   path="validatorNamePattern"
   default="isValid{modelName}"
 >
-  The pattern that specifies how the validators are named. The string must
-  contain the `{modelName}` substring (this is a literal value). For example,
-  providing `isValid{modelName}` ensures that the generated validators are given
-  names like `isValidUser`, `isValidProject` etc.
-</ParamField>
+  The pattern that specifies how the generated type validators are named. The pattern must be a string that contains the `"{modelName}"` substring (this is a literal value).
+  
+  Example values:
 
-<ParamField
-  type="string"
-  path="validatorParamName"
-  default="data"
->
+    - `"isValid{modelName}"` -> produces validators like `isValidUser`, `isValidProject`, `isValidAccount` etc.
+    - `"is{modelName}"` -> produces validators like `isUser`, `isProject`, `isAccount` etc.
+
+  </ParamField>
+
+<ParamField type="string" path="validatorParamName" default="data">
   The name of the parameter taken by each type validator.
 </ParamField>
 
