@@ -10,13 +10,13 @@ Generates Swift type definitions for the specified schema and writes them to the
 ## Usage
 
 ```bash
-typesync generate-swift --definition <filePathOrPattern> --platform <platform> --outFile <filePath> --indentation <indentation> --debug <debug>
+typesync generate-swift --definition <filePathOrPattern> --target <targetEnvironment> --outFile <filePath> --indentation <indentation> --debug <debug>
 ```
 
 <DefinitionOptionSnippet />
 
-<ParamField type="string" path="platform" required>
-  Target platform and version. The available platforms are:
+<ParamField type="string" path="target" required>
+  The target environment for which the types are generated. This option specifies the target SDK and version, ensuring that the output is compatible with the chosen environment. The available targets are:
 
 - `firebase@10`
 

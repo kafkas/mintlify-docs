@@ -50,20 +50,20 @@ User:
         type: timestamp
 ```
 
-We then run the following commands to generate types for 3 different platforms:
+We then run the following commands to generate types for 3 different targets:
 
 <CodeGroup>
 
 ```bash TS (frontend)
-typesync generate-ts --platform firebase@10 --definition models.yml # ... other options
+typesync generate-ts --target firebase@10 --definition models.yml # ... other options
 ```
 
 ```bash TS (backend)
-typesync generate-ts --platform firebase-admin@11 --definition models.yml # ... other options
+typesync generate-ts --target firebase-admin@11 --definition models.yml # ... other options
 ```
 
 ```bash Python
-typesync generate-py --platform firebase-admin@6 --definition models.yml # ... other options
+typesync generate-py --target firebase-admin@6 --definition models.yml # ... other options
 ```
 
 </CodeGroup>
