@@ -712,19 +712,7 @@ function isValidDog(data) {
 }
 
 function isValidPet(data) {
-  return ((
-    (data is map) &&
-    (data.keys().hasOnly(['type', 'name', 'lives_left'])) &&
-    (data.type == 'cat') &&
-    (data.name is string) &&
-    (data.lives_left is int)
-  ) || (
-    (data is map) &&
-    (data.keys().hasOnly(['type', 'name', 'breed'])) &&
-    (data.type == 'dog') &&
-    (data.name is string) &&
-    (data.breed is string)
-  ));
+  return (isValidCat(data) || isValidDog(data));
 }
 ```
 
