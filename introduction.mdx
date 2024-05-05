@@ -14,7 +14,7 @@ import ExampleUsageTSBackend from "/snippets/example-usage-ts-backend.mdx";
 import ExampleUsageSwift from "/snippets/example-usage-swift.mdx";
 import ExampleUsagePython from "/snippets/example-usage-py.mdx";
 
-Typesync is an open-source schema management tool that simplifies managing [Firestore](https://cloud.google.com/firestore) databases. Typesync allows you to maintain a single source of truth for your Firestore architecture in a special _schema_. With this schema in place, you can seamlessly auto-generate type definitions for multiple platforms like TypeScript, Python, Swift, and more using the CLI tool.
+Typesync is an open-source schema management tool that simplifies managing [Firestore](https://cloud.google.com/firestore) databases. Typesync allows you to maintain a single source of truth for your Firestore architecture in a special _schema_. With this schema in place, you can seamlessly auto-generate type definitions for multiple platforms like TypeScript, Swift, Python, and more using the CLI tool.
 
 Typesync keeps your database and application code consistent and up-to-date at all times. In addition to type definitions, it lets you generate other useful things like Security Rules, boilerplate code for Cloud Functions, and documentation for your data models.
 
@@ -45,13 +45,14 @@ typesync generate-ts --target firebase@10 --definition models.yml # ... other op
 typesync generate-ts --target firebase-admin@11 --definition models.yml # ... other options
 ```
 
+```bash Swift
+typesync generate-swift --target firebase@10 --definition models.yml # ... other options
+```
+
 ```bash Python
 typesync generate-py --target firebase-admin@6 --definition models.yml # ... other options
 ```
 
-```bash Swift
-typesync generate-swift --target firebase@10 --definition models.yml # ... other options
-```
 
 ```bash Security Rules
 typesync generate-rules --definition models.yml # ... other options
@@ -64,8 +65,8 @@ Typesync generates the following files:
 <CodeGroup>
   <ExampleGenerationTSFrontend />
   <ExampleGenerationTSBackend />
-  <ExampleGenerationPython />
   <ExampleGenerationSwift />
+  <ExampleGenerationPython />
   <ExampleGenerationRules />
 </CodeGroup>
 
@@ -74,8 +75,8 @@ Once we have the generated models, we can import and use them in our application
 <CodeGroup>
   <ExampleUsageTSFrontend />
   <ExampleUsageTSBackend />
-  <ExampleUsagePython />
   <ExampleUsageSwift />
+  <ExampleUsagePython />
 </CodeGroup>
 
 ## Design Goals

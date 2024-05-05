@@ -21,14 +21,14 @@ Example:
 export type Example = unknown;
 ```
 
+```swift models.swift
+typealias Example = Any
+```
+
 ```python models.py
 import typing
 
 Example = typing.Any
-```
-
-```swift models.swift
-typealias Example = Any
 ```
 
 ```javascript firestore.rules
@@ -83,12 +83,12 @@ Example:
 export type Example = string;
 ```
 
-```python models.py
-Example = str
-```
-
 ```swift models.swift
 typealias Example = String
+```
+
+```python models.py
+Example = str
 ```
 
 ```javascript firestore.rules
@@ -115,12 +115,12 @@ Example:
 export type Example = boolean;
 ```
 
-```python models.py
-Example = bool
-```
-
 ```swift models.swift
 typealias Example = Bool
+```
+
+```python models.py
+Example = bool
 ```
 
 ```javascript firestore.rules
@@ -147,12 +147,12 @@ Example:
 export type Example = number;
 ```
 
-```python models.py
-Example = int
-```
-
 ```swift models.swift
 typealias Example = Int
+```
+
+```python models.py
+Example = int
 ```
 
 ```javascript firestore.rules
@@ -179,12 +179,12 @@ Example:
 export type Example = number;
 ```
 
-```python models.py
-Example = float
-```
-
 ```swift models.swift
 typealias Example = Double
+```
+
+```python models.py
+Example = float
 ```
 
 ```javascript firestore.rules
@@ -211,14 +211,14 @@ Example:
 export type Example = firestore.Timestamp;
 ```
 
+```swift models.swift
+typealias Example = Date
+```
+
 ```python models.py
 import datetime
 
 Example = datetime.datetime
-```
-
-```swift models.swift
-typealias Example = Date
 ```
 
 ```javascript firestore.rules
@@ -247,19 +247,19 @@ MeaningOfLife:
 export type MeaningOfLife = 42;
 ```
 
+```swift models.swift
+typealias MeaningOfLife = Int
+```
+
 ```python models.py
 import typing
 
 MeaningOfLife = typing.Literal[42]
 ```
 
-```swift models.swift
-typealias MeaningOfLife = Int
-```
-
 ```javascript firestore.rules
 function isValidMeaningOfLife(data) {
-  return (data == 42);
+  return data == 42;
 }
 ```
 
@@ -290,6 +290,14 @@ UserRole:
 export type UserRole = "owner" | "admin" | "member";
 ```
 
+```swift models.swift
+enum UserRole: String, Codable {
+  case Owner = "owner"
+  case Admin = "admin"
+  case Member = "member"
+}
+```
+
 ```python models.py
 import enum
 
@@ -299,17 +307,9 @@ class UserRole(enum.Enum):
     Member = "member"
 ```
 
-```swift models.swift
-enum UserRole: String, Codable {
-  case Owner = "owner"
-  case Admin = "admin"
-  case Member = "member"
-}
-```
-
 ```javascript firestore.rules
 function isValidUserRole(data) {
-  return ((data == 'owner') || (data == 'admin') || (data == 'member'));
+  return data == "owner" || data == "admin" || data == "member";
 }
 ```
 
@@ -336,12 +336,12 @@ Example:
 export type Example = [string, boolean, number];
 ```
 
-```python models.py
-Example = tuple[str, bool, int]
-```
-
 ```swift models.swift
 typealias Example = (String, Bool, Int)
+```
+
+```python models.py
+Example = tuple[str, bool, int]
 ```
 
 ```javascript firestore.rules
@@ -370,12 +370,12 @@ Example:
 export type Example = string[];
 ```
 
-```python models.py
-Example = typing.List[str]
-```
-
 ```swift models.swift
 typealias Example = [String]
+```
+
+```python models.py
+Example = typing.List[str]
 ```
 
 ```javascript firestore.rules
@@ -404,14 +404,14 @@ Example:
 export type Example = Record<string, number>;
 ```
 
+```swift models.swift
+typealias Example = [String: Int]
+```
+
 ```python models.py
 import typing
 
 Example = typing.Dict[str, int]
-```
-
-```swift models.swift
-typealias Example = [String: Int]
 ```
 
 ```javascript firestore.rules
@@ -451,15 +451,6 @@ export type Example = {
 };
 ```
 
-```python models.py
-# ...
-class Example(TypesyncModel):
-    name: str
-    completed: bool
-    github_url: typing.Union[TypesyncUndefined, str] = UNDEFINED
-# ...
-```
-
 ```swift models.swift
 struct Example: Codable {
   var name: String
@@ -472,6 +463,15 @@ struct Example: Codable {
     case githubUrl = "github_url"
   }
 }
+```
+
+```python models.py
+# ...
+class Example(TypesyncModel):
+    name: str
+    completed: bool
+    github_url: typing.Union[TypesyncUndefined, str] = UNDEFINED
+# ...
 ```
 
 ```javascript firestore.rules
@@ -511,10 +511,6 @@ Path:
 export type Path = string | string[];
 ```
 
-```python models.py
-Path = typing.Union[str, typing.List[str]]
-```
-
 ```swift models.swift
 enum Example: Codable {
   case variant1(String)
@@ -546,6 +542,10 @@ enum Example: Codable {
     }
   }
 }
+```
+
+```python models.py
+Path = typing.Union[str, typing.List[str]]
 ```
 
 ```javascript firestore.rules
@@ -615,24 +615,6 @@ export type Dog = {
 export type Pet = Cat | Dog;
 ```
 
-```python models.py
-import typing
-import pydantic
-from typing_extensions import Annotated
-
-class Cat(TypesyncModel):
-    type: typing.Literal["cat"]
-    name: str
-    lives_left: int
-
-class Dog(TypesyncModel):
-    type: typing.Literal["dog"]
-    name: str
-    breed: str
-
-Pet = Annotated[typing.Union[Cat, Dog], pydantic.Field(discriminator='type')]
-```
-
 ```swift models.swift
 struct Cat: Codable {
   private(set) var type: String = "cat"
@@ -688,6 +670,24 @@ enum Pet: Codable {
     }
   }
 }
+```
+
+```python models.py
+import typing
+import pydantic
+from typing_extensions import Annotated
+
+class Cat(TypesyncModel):
+    type: typing.Literal["cat"]
+    name: str
+    lives_left: int
+
+class Dog(TypesyncModel):
+    type: typing.Literal["dog"]
+    name: str
+    breed: str
+
+Pet = Annotated[typing.Union[Cat, Dog], pydantic.Field(discriminator='type')]
 ```
 
 ```javascript firestore.rules
@@ -749,14 +749,6 @@ export type User = {
 export type WorkspaceMember = User;
 ```
 
-```python models.py
-class User(TypesyncModel):
-    name_first: str
-    name_last: str
-
-WorkspaceMember = User
-```
-
 ```swift models.swift
 struct User: Codable {
   var nameFirst: String
@@ -769,6 +761,14 @@ struct User: Codable {
 }
 
 typealias WorkspaceMember = User
+```
+
+```python models.py
+class User(TypesyncModel):
+    name_first: str
+    name_last: str
+
+WorkspaceMember = User
 ```
 
 ```javascript firestore.rules
