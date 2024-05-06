@@ -13,8 +13,16 @@ import ExampleGenerationRules from "/snippets/example-generation-rules.mdx";
 
 Generates type validator functions for Firestore Security Rules (version 2) and injects them into the specified file.
 
-Since Security Rules are written in a single file (named `firestore.rules` by default) and users often specify their custom rules on top of type validation, Typesync does not generate the whole file. Instead,
-it adds the type validators into a specific section of the file. This section is defined by the `startMarker` and `endMarker` options. See full [example](#example) below.
+Since Security Rules are centralized in a single file (typically `firestore.rules`), and developers often implement custom rules alongside type validations, Typesync is designed to insert only the necessary validator functions, without overriding your custom rules. You can specify where these validators are added within the file using the `startMarker` and `endMarker` options. For a detailed guide, see the full [example](#example) below.
+
+<Info>
+  Note that these validators must adhere to the intrinsic limitations of
+  Security Rules. For example, while it's feasible to verify if `x` is a list
+  with the `x is list` predicate, determining whether it's a list of strings is
+  not possible since loop constructs are not available in Security Rules.
+  Typesync will provide the most stringent validation possible within
+  these constraints.
+</Info>
 
 ## Usage
 
@@ -73,6 +81,6 @@ To generate type validators for the defined models and inject them between the `
 typesync generate-rules --definition definition.yml --outFile firestore.rules
 ```
 
-Typesync will inject the `isValidUserRole()` and `isValidUser()` validators into the file. You can then use these validators as needed in your custom rules.
+Typesync will insert the `isValidUserRole()` and `isValidUser()` validators into the file. You can then use these validators as needed in your custom rules.
 
 <ExampleGenerationRules />
