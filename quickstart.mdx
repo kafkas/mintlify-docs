@@ -5,7 +5,7 @@ title: "Quickstart"
 import ExampleDefinition from "/snippets/example-definition.mdx";
 import ExampleGenerationTSBackend from "/snippets/example-generation-ts-backend.mdx";
 
-<Steps>
+<Steps titleSize="h2">
   <Step title="Install Typesync CLI">
     First, ensure you have [Node.js](https://nodejs.org) 18+ installed. Then, install the Typesync CLI using npm:
 
@@ -57,11 +57,11 @@ Here's what the generated TypeScript file might look like:
 
 You should regenerate your types anytime the schema changes. To streamline development, consider integrating the Typesync generation command into your build process or CI/CD pipeline.
 
-**Version Control**
+### Version Control
 
 Decide if you want to version control the generated files. It can be beneficial for ensuring consistency across environments but may require additional maintenance.
 
-**Multiple Files**
+### Multiple Files
 
 As your project grows, you might want to split your schema into multiple YAML/JSON files. Typesync will automatically handle all files matching the pattern that you provide to it through the `--definition` option.
 
