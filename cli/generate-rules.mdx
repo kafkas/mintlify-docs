@@ -13,7 +13,7 @@ import ExampleGenerationRules from "/snippets/example-generation-rules.mdx";
 
 Generates type validator functions for Firestore Security Rules (version 2) and injects them into the specified file.
 
-Since Security Rules are centralized in a single file (typically `firestore.rules`), and developers often implement custom rules alongside type validations, Typesync is designed to insert only the necessary validator functions, without overriding your custom rules. You can specify where these validators are added within the file using the `startMarker` and `endMarker` options. For a detailed guide, see the full [example](#example) below.
+Since Security Rules are centralized in a single file (typically `firestore.rules`), and developers often implement custom rules alongside type validations, Typesync inserts only the necessary validator functions, without overriding your custom rules. You can specify where these validators are added within the file using the `--startMarker` and `--endMarker` options. For a detailed guide, see the full [example](#example) below.
 
 <Info>
   Note that these validators must adhere to the intrinsic limitations of
@@ -37,12 +37,12 @@ typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --
 
 <ParamField type="string" path="startMarker" default="typesync-start">
   A marker that indicates the line after which the generated code should be
-  inserted.
+  inserted. Make sure to use a string that is unique within the file.
 </ParamField>
 
 <ParamField type="string" path="endMarker" default="typesync-end">
   A marker that indicates the line before which the generated code should be
-  inserted.
+  inserted. Make sure to use a string that is unique within the file.
 </ParamField>
 
 <ParamField
@@ -75,7 +75,7 @@ Suppose you have a schema definition file named `models.yml` and a Security Rule
   <ExampleGenerationRulesBefore />
 </CodeGroup>
 
-To generate type validators for the defined models and inject them between the `typesync-start` and `typesync-end` markers (these are the default values for `startMarker` and `endMarker` options) in the `firestore.rules` file, you can run the following command:
+To generate type validators for the defined models and inject them between the `typesync-start` and `typesync-end` markers (these are the default values for `--startMarker` and `--endMarker` options) in the `firestore.rules` file, you can run the following command:
 
 ```bash
 typesync generate-rules --definition definition.yml --outFile firestore.rules
