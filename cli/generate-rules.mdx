@@ -7,8 +7,14 @@ import DefinitionOption from "/snippets/cli-option-definition.mdx";
 import OutFileOption from "/snippets/cli-option-out-file.mdx";
 import IndentationOption from "/snippets/cli-option-indentation.mdx";
 import DebugOption from "/snippets/cli-option-debug.mdx";
+import ExampleDefinition from "/snippets/example-definition.mdx";
+import ExampleGenerationRulesBefore from "/snippets/example-generation-rules-before.mdx";
+import ExampleGenerationRules from "/snippets/example-generation-rules.mdx";
 
 Generates type validator functions for Firestore Security Rules (version 2) and injects them into the specified file.
+
+Since Security Rules are written in a single file (named `firestore.rules` by default) and users often specify their custom rules on top of type validation, Typesync does not generate the whole file. Instead,
+it adds the type validators into a specific section of the file. This section is defined by the `startMarker` and `endMarker` options. See full [example](#example) below.
 
 ## Usage
 
@@ -51,3 +57,22 @@ typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --
 
 <IndentationOption />
 <DebugOption />
+
+## Example
+
+Suppose you have a schema definition file named `models.yml` and a Security Rules file named `firestore.rules`.
+
+<CodeGroup>
+  <ExampleDefinition />
+  <ExampleGenerationRulesBefore />
+</CodeGroup>
+
+To generate type validators for the defined models and inject them between the `typesync-start` and `typesync-end` markers (these are the default values for `startMarker` and `endMarker` options) in the `firestore.rules` file, you can run the following command:
+
+```bash
+typesync generate-rules --definition definition.yml --outFile firestore.rules
+```
+
+Typesync will inject the `isValidUserRole()` and `isValidUser()` validators into the file. You can then use these validators as needed in your custom rules.
+
+<ExampleGenerationRules />
