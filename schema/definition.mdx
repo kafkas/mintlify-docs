@@ -57,7 +57,8 @@ An alias model is used for convenience purposes to define reusable type aliases.
 </ParamField>
 
 <ParamField path="type" type="string | hash" required>
-  The type of which this model is an alias. Can be any Typesync [type](/schema/types).
+  The type of which this model is an alias. Can be any Typesync
+  [type](/schema/types).
 </ParamField>
 
 ### Example
@@ -89,9 +90,15 @@ When writing your definition, always include the following line at the top of ea
 
 This indicates to your IDE that the file is not just any YAML file but a part of a Typesync definition. This will allow your IDE to provide Intellisense/autocomplete for definition fields.
 
-<Info>
-  For the time being, you need manually synchronize the schema version in this
-  line with the Typesync version you're using. For example, if you're using
-  Typesync version 0.4.2, you need to make sure that the version in the above
-  schema URL is `v0.4` (patch version excluded).
-</Info>
+For the time being, you need manually synchronize the schema version in this
+line with the Typesync version you're using. For example, if you're using
+Typesync version 0.4.2, you need to make sure that the version in the above
+schema URL is `v0.4`. Patch version is excluded.
+
+<Tip>
+  For type hinting to take effect, you may need to install a YAML extension that
+  automatically loads the specified JSON Schema. For VS Code, we recommend using
+  the
+  [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
+  extension by Red Hat.
+</Tip>
