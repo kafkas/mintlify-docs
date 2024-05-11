@@ -22,6 +22,15 @@ typesync generate-ts --definition <filePathOrPattern> --target <targetEnvironmen
 <DefinitionOption />
 <TargetOption />
 <OutFileOption />
+<ParamField
+  type='"interface" | "type-alias"'
+  path="objectTypeFormat"
+  default="interface"
+>
+
+Controls how objects are defined in the TypeScript output. Object types can be represented either by interfaces or type aliases.
+
+</ParamField>
 <IndentationOption />
 <DebugOption />
 
