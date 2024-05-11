@@ -5,9 +5,43 @@ icon: "cube"
 
 Here, you'll find a comprehensive list of all types supported by the Typesync specification. Typesync's powerful type system is designed to support a wide array of complex and useful types.
 
+## `any`
+
+Represents any type.
+
+<CodeGroup>
+
+```yaml definition.yml
+Example:
+  model: alias
+  type: any
+```
+
+```ts models.ts
+export type Example = any;
+```
+
+```swift models.swift
+typealias Example = Any
+```
+
+```python models.py
+import typing
+
+Example = typing.Any
+```
+
+```javascript firestore.rules
+function isValidExample(data) {
+  return true;
+}
+```
+
+</CodeGroup>
+
 ## `unknown`
 
-Represents an unknown value.
+Represents an unknown type.
 
 <CodeGroup>
 
