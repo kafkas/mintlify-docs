@@ -29,11 +29,6 @@
   },
   "anchors": [
     {
-      "name": "Community & Support",
-      "icon": "discord",
-      "url": "https://discord.gg/Hb2HW98DvF"
-    },
-    {
       "name": "GitHub",
       "icon": "github",
       "url": "https://github.com/kafkas/typesync"
@@ -42,6 +37,11 @@
       "name": "Changelog",
       "icon": "list-tree",
       "url": "https://github.com/kafkas/typesync/blob/main/CHANGELOG.md"
+    },
+    {
+      "name": "Support",
+      "icon": "discord",
+      "url": "https://discord.gg/Hb2HW98DvF"
     }
   ],
   "navigation": [
