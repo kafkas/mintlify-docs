@@ -8,7 +8,7 @@ import ExampleGenerationTSBackend from "/snippets/example-generation-ts-backend.
 Upgrading your Typesync version is an important step to ensure you benefit from the latest features, bug fixes, and improvements.
 
 <Warning>
-  Until we reach our v1 release, there may be breaking changes between minor
+  Until we reach our v1 release, breaking changes may occur between minor
   versions (e.g. when upgrading from v0.6 to v0.7).
 </Warning>
 
@@ -16,19 +16,18 @@ Here's how to manage upgrades smoothly:
 
 <Steps titleSize="h2">
   <Step title="Review the changelog">
-    Always check the
+    Always review the
     [changelog](https://github.com/kafkas/typesync/blob/main/CHANGELOG.md) for
-    new features and breaking changes before upgrading. This helps you prepare
-    for any necessary adjustments.
+    new features and breaking changes before upgrading. This will help you anticipate and prepare for any necessary adjustments.
   </Step>
 
   <Step title="Update schema version in definition">
     
-    Update the JSON schema version in each schema definition file. This is a cheap way to quickly check whether your current definition would be compatible with a new Typesync CLI version.
+    Update the JSON schema version in each schema definition file. This is a cheap way to quickly check if your current definition would be compatible with a new Typesync CLI version.
     
-    For example, if you're planning to upgrade to 0.6.3, update the schema URL to `https://schema.typesync.org/v0.6.json`. If you're getting highlighting errors after the change, you will likely need to make some changes after the upgrade.
+    For example, if you're planning to upgrade to 0.6.3, update the schema URL to `https://schema.typesync.org/v0.6.json`. If you notice any syntax errors (marked in red in most IDEs) after this update, it's likely you'll need to make some adjustments post-upgrade.
     
-    See [Autocomplete/Intellisense](schema/definition#autcomplete-intellisense) for more details.
+    For more information, see [Autocomplete/Intellisense](schema/definition#autcomplete-intellisense).
 
   </Step>
 
@@ -53,7 +52,7 @@ Here's how to manage upgrades smoothly:
 
   <Step title="Run validation command">
   
-  Validate your schema definition with the CLI. This will give you a definitive answer as to whether your current definition is compatible with the new CLI version.
+  Validate your schema definition with the CLI. This will definitively confirm whether your current definition is compatible with the new CLI version.
 
     ```bash
     typesync validate --definition <pathToDefinition>
@@ -63,7 +62,7 @@ Here's how to manage upgrades smoothly:
 
   <Step title="Test generated output">
   
-    Thoroughly test the generated type definitions. Check if your application builds with the new definition and consider writing automated tests for the runtime behavior.
+    Thoroughly test the generated type definitions. Ensure your application builds with the new definitions and consider implementing automated tests to verify runtime behavior.
 
   </Step>
 </Steps>
