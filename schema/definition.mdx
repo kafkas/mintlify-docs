@@ -3,9 +3,9 @@ title: "Definition"
 icon: "files"
 ---
 
-The Typesync schema for a project is defined in a collection of YAML/JSON files. Your definition can contain as many model definition files as you need and you can organize them any way you want. There are two types of models that you can define in a model definition file: _document models_ and _alias models_.
+The Typesync schema for a project is defined in a collection of YAML/JSON files. Your definition can contain as many model definition files as you need and you can organize them any way you want.
 
-<Note>We use the terms _definition_ and _schema_ interchangeably.</Note>
+Each top-level field in a definition file must refer to a model name and the corresponding value must be the model definition. There are two types of models that you can define in a model definition file: _document models_ and _alias models_.
 
 ## Document models
 
@@ -91,7 +91,7 @@ UserRole:
     # yaml-language-server: $schema=https://schema.typesync.org/v0.8.json
     ```
 
-    This indicates to your IDE that the file is not just any YAML file but a part of a Typesync definition. This will allow your IDE to provide Intellisense/autocomplete for definition fields.
+    This indicates to your IDE that the file is not just any YAML file but a part of a Typesync definition by linking it to the relevant JSON Schema.. This will allow your IDE to provide Intellisense/autocomplete for definition fields.
 
     <Tip>
     For type hinting to take effect, you may need to install a YAML extension that
@@ -113,7 +113,7 @@ UserRole:
       }
       ```
 
-      This indicates to your IDE that the file is not just any JSON file but a part of a Typesync definition. This will allow your IDE to provide Intellisense/autocomplete for definition fields.
+      This indicates to your IDE that the file is not just any JSON file but a part of a Typesync definition by linking it to the relevant JSON Schema. This will allow your IDE to provide Intellisense/autocomplete for definition fields.
 
       <Tip>
       For type hinting to take effect, you may need to install an extension that
@@ -127,3 +127,19 @@ For the time being, you need manually synchronize the schema version in this
 line with the Typesync version you're using. For example, if you're using
 Typesync version 0.4.2, you need to make sure that the version in the above
 schema URL is `v0.4`. Patch version is always excluded.
+
+## Validating with CLI
+
+While utilizing a JSON schema can help identify syntax errors within your schema definition, the Typesync CLI provides the most reliable method to check if a definition is syntactically valid. To validate a schema definition, use the `validate` command as shown below:
+
+```bash
+typesync validate --definition <pathToDefinition>
+```
+
+For additional details on using this command, see [validate](/cli/validate).
+
+<Note>
+
+Typesync automatically validates your definition before running any generators. The manual validation command is needed when you just want to check if your schema definition is valid without generating any artifacts.
+
+</Note>
