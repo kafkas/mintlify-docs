@@ -1,0 +1,69 @@
+---
+title: "Upgrading"
+---
+
+import ExampleDefinition from "/snippets/example-definition.mdx";
+import ExampleGenerationTSBackend from "/snippets/example-generation-ts-backend.mdx";
+
+Upgrading your Typesync version is an important step to ensure you benefit from the latest features, bug fixes, and improvements.
+
+<Warning>
+  Until we reach our v1 release, there may be breaking changes between minor
+  versions (e.g. when upgrading from v0.6 to v0.7).
+</Warning>
+
+Here's how to manage upgrades smoothly:
+
+<Steps titleSize="h2">
+  <Step title="Review the changelog">
+    Always check the
+    [changelog](https://github.com/kafkas/typesync/blob/main/CHANGELOG.md) for
+    new features and breaking changes before upgrading. This helps you prepare
+    for any necessary adjustments.
+  </Step>
+
+  <Step title="Update schema version in definition">
+    
+    Update the JSON schema version in each schema definition file. This is a cheap way to quickly check whether your current definition would be compatible with a new Typesync CLI version.
+    
+    For example, if you're planning to upgrade to 0.6.3, update the schema URL to `https://schema.typesync.org/v0.6.json`. If you're getting highlighting errors after the change, you will likely need to make some changes after the upgrade.
+    
+    See [Autocomplete/Intellisense](schema/definition#autcomplete-intellisense) for more details.
+
+  </Step>
+
+  <Step title="Install the latest CLI">
+    Install the latest version of the Typesync CLI.
+
+    <CodeGroup>
+
+    ```bash Global
+    npm install -g typesync-cli@latest
+    ```
+
+    ```bash Local
+    npm install typesync-cli@latest
+    ```
+
+    </CodeGroup>
+
+    Run `typesync --version` to check the version you're currently on.
+
+  </Step>
+
+  <Step title="Run validation command">
+  
+  Validate your schema definition with the CLI. This will give you a definitive answer as to whether your current definition is compatible with the new CLI version.
+
+    ```bash
+    typesync validate --definition <pathToDefinition>
+    ```
+
+  </Step>
+
+  <Step title="Test generated output">
+  
+    Thoroughly test the generated type definitions. Check if your application builds with the new definition and consider writing automated tests for the runtime behavior.
+
+  </Step>
+</Steps>

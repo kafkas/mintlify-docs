@@ -46,8 +46,8 @@
   ],
   "navigation": [
     {
-      "group": "Getting Started",
-      "pages": ["introduction", "installation", "quickstart"]
+      "group": "Overview",
+      "pages": ["introduction", "installation", "quickstart", "upgrading"]
     },
     {
       "group": "Schema",
