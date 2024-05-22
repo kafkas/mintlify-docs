@@ -60,6 +60,7 @@
         "cli/generate-swift",
         "cli/generate-py",
         "cli/generate-rules",
+        "cli/generate-graph",
         "cli/validate"
       ]
     }
