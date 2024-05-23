@@ -16,7 +16,7 @@ A document model represents the shape of a document in a particular Firestore co
 </ParamField>
 
 <ParamField path="path" type="string" required>
-An exact or generic path to the document. Must be a string consisting of path segments separated by a `/` (slash). Each segment can be a literal or generic ID of the collection or document. A generic ID must be surrounded with curly braces (e.g. `{userId}`) and a literal ID is just a plain ID like `users`.
+An exact or generic path to the document. Must be a string consisting of path segments separated by a `/` (slash). Each segment can either be a literal ID or a generic ID of the collection or document. A literal ID is a plain string, such as `users`, while a generic ID must be enclosed in curly braces (e.g. `{userId}`).
 
 Example values:
 
