@@ -15,6 +15,18 @@ A document model represents the shape of a document in a particular Firestore co
   A literal field that specifies that this is a `document` model.
 </ParamField>
 
+<ParamField path="path" type="string" required>
+An exact or generic path to the document. Must be a string consisting of path segments separated by a `/` (slash). Each segment can be a literal or generic ID of the collection or document. A generic ID must be surrounded with curly braces (e.g. `{userId}`) and a literal ID is just a plain ID like `users`.
+
+Example values:
+
+- `projects/{projectId}`: A document in a top-level `projects` collection.
+- `users/{userId}/posts/{postId}`: A document in a `posts` sub-collection.
+- `static/data/authors/{authorId}`: A document in a static `authors` sub-collection.
+- `{rootColId}/{docId}/cities/london`: A document with a specific ID in a `cities` sub-collection.
+
+</ParamField>
+
 <ParamField path="docs" type="string">
   Optional documentation explaining the model in more detail. Typesync will add
   this to the doc comments for the generated models.
@@ -32,6 +44,7 @@ A document model represents the shape of a document in a particular Firestore co
 
 User:
   model: document
+  path: users/{userId}
   docs: Represents a user that belongs to a project.
   type:
     type: object
