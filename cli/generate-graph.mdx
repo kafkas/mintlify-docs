@@ -7,9 +7,11 @@ import DefinitionOption from "/snippets/cli-option-definition.mdx";
 import OutFileOption from "/snippets/cli-option-out-file.mdx";
 import IndentationOption from "/snippets/cli-option-indentation.mdx";
 import DebugOption from "/snippets/cli-option-debug.mdx";
-import ExampleDefinition from "/snippets/example-definition.mdx";
+import ExampleDefinitionGraph from "/snippets/example-definition-graph.mdx";
+import ExampleGenerationGraphBefore from "/snippets/example-generation-graph-before.mdx";
+import ExampleGenerationGraph from "/snippets/example-generation-graph.mdx";
 
-Generates a Mermaid graph for the specified schema and injects it into the specified Markdown file. You can specify where the generated graph is inserted within the file using the `--startMarker` and `--endMarker` options. For a detailed guide, see the full [example](#example) below.
+Generates a Mermaid graph for the specified schema and injects it into the specified Markdown file. The generated graph is the visual representation of the database architecture inferred from your schema. You can specify where the graph is inserted within the file using the `--startMarker` and `--endMarker` options. For a detailed guide, see the full [example](#example) below.
 
 ## Usage
 
@@ -51,4 +53,33 @@ typesync generate-graph --definition <filePathOrPattern> --outFile <filePath> --
 
 ## Example
 
-{/* TODO: Add */}
+Suppose you have a schema definition file named `models.yml` and a Markdown file named `graph.md`.
+
+<CodeGroup>
+  <ExampleDefinitionGraph />
+  <ExampleGenerationGraphBefore />
+</CodeGroup>
+
+To generate a Mermaid graph for the defined models and inject them between the `typesync-start` and `typesync-end` markers in the `graph.md` file, you can run the following command:
+
+```bash
+typesync generate-graph --definition definition.yml --outFile graph.md --startMarker typesync-start --endMarker typesync-end
+```
+
+Once you run the command, Typesync inserts the Mermaid graph definition into the specified section.
+
+<ExampleGenerationGraph />
+
+The graph generated for the above schema looks as follows:
+
+```mermaid
+graph LR
+    node1["authors"] --> node2["{authorId}"]
+    node3["books"] --> node4["{bookId}"]
+    node4["{bookId}"] --> node5["chapters"]
+    node5["chapters"] --> node6["{chapterId}"]
+    node4["{bookId}"] --> node7["reviews"]
+    node7["reviews"] --> node8["{reviewId}"]
+    node4["{bookId}"] --> node9["translations"]
+    node9["translations"] --> node10["{translationId}"]
+```
