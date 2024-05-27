@@ -27,7 +27,7 @@ Since Security Rules are centralized in a single file (typically `firestore.rule
 ## Usage
 
 ```bash
-typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --startMarker <startMarker> --endMarker <endMarker> --typeValidatorNamePattern <typeValidatorNamePattern> --validatorParamName <validatorParamName> --indentation <indentation> --debug <debug>
+typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --startMarker <startMarker> --endMarker <endMarker> --typeValidatorNamePattern <typeValidatorNamePattern> --typeValidatorParamName <typeValidatorParamName> --indentation <indentation> --debug <debug>
 ```
 
 ## Options
@@ -64,7 +64,7 @@ typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --
 
   </ParamField>
 
-<ParamField type="string" path="validatorParamName" default="data">
+<ParamField type="string" path="typeValidatorParamName" default="data">
   The name of the parameter taken by each type validator.
 </ParamField>
 
