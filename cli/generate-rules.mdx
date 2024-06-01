@@ -11,7 +11,7 @@ import ExampleDefinition from "/snippets/example-definition.mdx";
 import ExampleGenerationRulesBefore from "/snippets/example-generation-rules-before.mdx";
 import ExampleGenerationRules from "/snippets/example-generation-rules.mdx";
 
-Generates type validator functions for Firestore Security Rules (version 2) and injects them into the specified file.
+Generates validator functions for Firestore Security Rules (version 2) and injects them into the specified file. These validators ensure that request data adheres to defined model interfaces and detect any modifications to read-only fields during write operations.
 
 Since Security Rules are centralized in a single file (typically `firestore.rules`), and developers often implement custom rules alongside type validations, Typesync inserts only the necessary validator functions, without overriding your custom rules. You can specify where these validators are added within the file using the `--startMarker` and `--endMarker` options. For a detailed guide, see the full [example](#example) below.
 
@@ -68,6 +68,42 @@ typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --
   The name of the parameter taken by each type validator.
 </ParamField>
 
+<ParamField
+  type="string"
+  path="readonlyFieldValidatorNamePattern"
+  default="isReadonlyFieldAffectedFor{modelName}"
+>
+  The pattern that specifies how the generated readonly field validators are named. The pattern must be a string that contains the `"{modelName}"` substring (this is a literal value).
+  
+  Example values:
+
+    - `"isReadonlyFieldAffectedFor{modelName}"` -> produces validators like `isReadonlyFieldAffectedForUser`, `isReadonlyFieldAffectedForProject`, `isReadonlyFieldAffectedForAccount` etc.
+    - `"affectsReadonlyFieldFor{modelName}"` -> produces validators like `affectsReadonlyFieldForUser`, `affectsReadonlyFieldForProject`, `affectsReadonlyFieldForAccount` etc.
+
+  </ParamField>
+
+<ParamField
+  type="string"
+  path="readonlyFieldValidatorPrevDataParamName"
+  default="prevData"
+>
+  The name of the first parameter taken by each readonly field validator
+  representing previous data. This parameter used when computing the diff
+  between next data and previous data to determine whether a readonly field has
+  been affected by a write.
+</ParamField>
+
+<ParamField
+  type="string"
+  path="readonlyFieldValidatorNextDataParamName"
+  default="nextData"
+>
+  The name of the second parameter taken by each readonly field validator
+  representing next data. This parameter used when computing the diff between
+  next data and previous data to determine whether a readonly field has been
+  affected by a write.
+</ParamField>
+
 <IndentationOption />
 <DebugOption />
 
@@ -79,6 +115,9 @@ Suppose you have a schema definition file named `models.yml` and a Security Rule
   <ExampleDefinition />
   <ExampleGenerationRulesBefore />
 </CodeGroup>
+
+
+{/* TODO: Update */}
 
 To generate type validators for the defined models and inject them between the `typesync-start` and `typesync-end` markers in the `firestore.rules` file, you can run the following command:
 
