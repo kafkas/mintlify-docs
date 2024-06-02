@@ -119,7 +119,7 @@ Suppose you have a schema definition file named `models.yml` and a Security Rule
 
 {/* TODO: Update */}
 
-To generate type validators for the defined models and inject them between the `typesync-start` and `typesync-end` markers in the `firestore.rules` file, you can run the following command:
+To generate validators for the defined models and inject them between the `typesync-start` and `typesync-end` markers in the `firestore.rules` file, you can run the following command:
 
 ```bash
 typesync generate-rules --definition definition.yml --outFile firestore.rules --startMarker typesync-start --endMarker typesync-end
