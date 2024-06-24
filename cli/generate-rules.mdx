@@ -68,7 +68,7 @@ typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --
   The name of the parameter taken by each type validator.
 </ParamField>
 
-<ParamField
+{/* <ParamField
   type="string"
   path="readonlyFieldValidatorNamePattern"
   default="isReadonlyFieldAffectedFor{modelName}"
@@ -80,9 +80,9 @@ typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --
     - `"isReadonlyFieldAffectedFor{modelName}"` -> produces validators like `isReadonlyFieldAffectedForUser`, `isReadonlyFieldAffectedForProject`, `isReadonlyFieldAffectedForAccount` etc.
     - `"affectsReadonlyFieldFor{modelName}"` -> produces validators like `affectsReadonlyFieldForUser`, `affectsReadonlyFieldForProject`, `affectsReadonlyFieldForAccount` etc.
 
-  </ParamField>
+  </ParamField> */}
 
-<ParamField
+{/* <ParamField
   type="string"
   path="readonlyFieldValidatorPrevDataParamName"
   default="prevData"
@@ -91,9 +91,9 @@ typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --
   representing previous data. This parameter used when computing the diff
   between next data and previous data to determine whether a readonly field has
   been affected by a write.
-</ParamField>
+</ParamField> */}
 
-<ParamField
+{/* <ParamField
   type="string"
   path="readonlyFieldValidatorNextDataParamName"
   default="nextData"
@@ -102,7 +102,7 @@ typesync generate-rules --definition <filePathOrPattern> --outFile <filePath> --
   representing next data. This parameter used when computing the diff between
   next data and previous data to determine whether a readonly field has been
   affected by a write.
-</ParamField>
+</ParamField> */}
 
 <IndentationOption />
 <DebugOption />
